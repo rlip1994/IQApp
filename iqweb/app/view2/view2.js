@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.view2', ['ngRoute'])
+angular.module('smart', ['ngRoute'])
 
 
 .controller('View2Ctrl', [function() {
