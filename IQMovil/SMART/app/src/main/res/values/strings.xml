@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">SMART</string>
+    <string name="child_Name">Nombre Completo</string>
+    <string name="child_age">Edad</string>
+    <string name="child_province">Localidad</string>
+    <string name="child_school">Escuela</string>
+    <string name="tiempo">30</string>
+    <string name="pregunta_titulo">Pregunta</string>
+    <string name="enunciado_pregunta">Enunciado</string>
+    <string name="opcion_respuesta_texto">respuesta</string>
 </resources>
