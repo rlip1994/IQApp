@@ -9,24 +9,24 @@ import android.widget.BaseAdapter;
 import java.util.ArrayList;
 
 /**
- * Created by klcho.o on 12/9/2017.
+ * Created by klcho.o on 16/9/2017.
  */
 
-public abstract class Adapter extends BaseAdapter {
+public abstract class Adapter_Category extends BaseAdapter {
 
 
-    private ArrayList<?> child_list;
+    private ArrayList<?> category_list;
     private int R_layout_IdView;
     private Context context;
 
     /*
-    *  Se le pasa el contexto del app,id del layout entrada y el arraylist con los datos
+    *  Se le pasa el contexto del app,id del layout formato y el arraylist con los datos
     */
 
-    public Adapter(Context pContext, int pR_layout_IdView, ArrayList<?> pChildList) {
+    public Adapter_Category(Context pContext, int pR_layout_IdView, ArrayList<?> pCategoryList) {
         super();
         this.context = pContext;
-        this.child_list = pChildList;
+        this.category_list = pCategoryList;
         this.R_layout_IdView = pR_layout_IdView;
     }
 
@@ -36,18 +36,18 @@ public abstract class Adapter extends BaseAdapter {
             LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = vi.inflate(R_layout_IdView, null);
         }
-        onEntrada (child_list.get(pos), view);
+        onAdaptarCategory (category_list.get(pos), view);
         return view;
     }
 
     @Override
     public int getCount() {
-        return child_list.size();
+        return category_list.size();
     }
 
     @Override
     public Object getItem(int pos) {
-        return child_list.get(pos);
+        return category_list.get(pos);
     }
 
     @Override
@@ -57,6 +57,7 @@ public abstract class Adapter extends BaseAdapter {
 
     /** Devuelve cada una de las entradas con cada una de las vistas a la que debe de ser asociada
      */
-    public abstract void onEntrada (Object child_list, View view);
+    public abstract void onAdaptarCategory (Object child_list, View view);
+
 
 }

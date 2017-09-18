@@ -9,4 +9,6 @@
     <string name="question">statement</string>
     <string name="option_answ">option</string>
     <string name="Start">Start</string>
+    <string name="Category">Choose a category </string>
+    <string name="Child">Choose a kid </string>
 </resources>

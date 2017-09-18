@@ -18,7 +18,7 @@ public class childList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.adapter);
+        setContentView(R.layout.adapter_child_list);
 
         // .... ingresar los datos a un arreglo
         ArrayList<Child> data = new ArrayList<Child>();
@@ -29,25 +29,25 @@ public class childList extends AppCompatActivity {
 
         //..... agregar los datos al layout
 
-        list = (ListView) findViewById(R.id.ListView_listado);
-        list.setAdapter(new Adapter(this, R.layout.entrada, data){
+        list = (ListView) findViewById(R.id.ListView_childlist);
+        list.setAdapter(new Adapter_childList(this, R.layout.child_category, data){
             @Override
             public void onEntrada (Object child, View view) {
                 if (child != null) {
-                    TextView texto_nombre = (TextView) view.findViewById(R.id.textView_name);
-                    if (texto_nombre != null)
-                        texto_nombre.setText(((Child) child).getName());
+                    TextView name = (TextView) view.findViewById(R.id.textView_name);
+                    if (name != null)
+                        name.setText(((Child) child).getName());
 
-                    TextView texto_edad = (TextView) view.findViewById(R.id.textView_age);
-                    if (texto_edad != null)
-                        texto_edad.setText(((Child) child).getAge());
+                    TextView age = (TextView) view.findViewById(R.id.textView_age);
+                    if (age != null)
+                        age.setText(((Child) child).getAge());
 
-                    TextView texto_localidad = (TextView) view.findViewById(R.id.textView_located);
-                    if (texto_localidad != null)
-                        texto_localidad.setText(((Child) child ).getLocate());
-                    TextView texto_escuela = (TextView) view.findViewById(R.id.textView_school);
-                    if (texto_escuela != null)
-                        texto_escuela.setText(((Child) child).getSchool());
+                    TextView located = (TextView) view.findViewById(R.id.textView_located);
+                    if (located != null)
+                        located.setText(((Child) child ).getLocate());
+                    TextView school = (TextView) view.findViewById(R.id.textView_school);
+                    if (school != null)
+                        school.setText(((Child) child).getSchool());
 
                 }
             }
@@ -59,8 +59,9 @@ public class childList extends AppCompatActivity {
             public void onItemClick(AdapterView<?> pariente, View view, int posicion, long id) {
                 Child itemElegido = (Child) pariente.getItemAtPosition(posicion);
 
-                Intent Activity = new Intent(getApplicationContext(), questionsImage.class);
+                Intent Activity = new Intent(getApplicationContext(), categoryList.class);
                 startActivity(Activity);
+                finish();
             }
         });
 
