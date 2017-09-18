@@ -1,20 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.smartapp.web.smart.MainActivity">
+    tools:context="com.smartapp.web.smart.childList"
+    android:background="@drawable/rainbow">
 
-    <TextView
-        android:id="@+id/sample_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="237dp"
+        android:layout_height="262dp"
+        app:srcCompat="@drawable/buho"
+        tools:layout_editor_absoluteX="74dp"
+        tools:layout_editor_absoluteY="59dp"
+        android:layout_marginTop="47dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/buttonStart"
+        android:layout_width="241dp"
+        android:layout_height="46dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_marginBottom="112dp"
+        android:background="@drawable/circle_buttom"
+        android:text="@string/Start"
+        android:textColor="@color/Darkgray"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="74dp"
+        tools:layout_editor_absoluteY="401dp" />
+</RelativeLayout>
