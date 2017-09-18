@@ -1,27 +1,63 @@
 package com.smartapp.web.smart;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
+
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+
+import org.json.JSONArray;
+
+import Controllers.CategoryController;
+import conexion.AppController;
+import utils.Const;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    private ListView lista;
+    private TextView txtView;
+    public static Activity activity;
+    private String tag_json_obj = "jobj_req" ,tag_json_arry = "jarray_req";
+    private String TAG = "Main";
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.listado);
+        activity = this;
+        setContentView(R.layout.activity_main);
+        this.txtView = (TextView) findViewById(R.id.sample_text);
+
+        try {
+            CategoryController categoryController;
+            categoryController =  new CategoryController();
+
+        } catch (Exception e) {
+            //e.printStackTrace();
+            showAlertMessage(e.toString());
+        }
+
 
         // .... ingresar los datos a un arreglo
-        ArrayList<lista_entrada> datos = new ArrayList<lista_entrada>();
+        /**ArrayList<lista_entrada> datos = new ArrayList<lista_entrada>();
 
         datos.add(new lista_entrada("Niño1","8","escuela1","SJ"));
         datos.add(new lista_entrada("Niño2","9","escuela2","Al"));
@@ -33,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
         lista.setAdapter(new lista_adaptador(this, R.layout.entrada, datos){
             @Override
             public void onEntrada(Object entrada, View view) {
+
+
                 if (entrada != null) {
                     TextView texto_nombre = (TextView) view.findViewById(R.id.textView_nombre);
                     if (texto_nombre != null)
@@ -62,10 +100,15 @@ public class MainActivity extends AppCompatActivity {
                 Intent Activity = new Intent(getApplicationContext(), preguntas.class);
                 startActivity(Activity);
             }
-        });
+        });**/
 
 
     }
-
+    public  void showAlertMessage(String pMessage){
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setTitle("Alert");
+        alertDialog.setMessage(pMessage);
+        alertDialog.show();
+    }
 
 }
