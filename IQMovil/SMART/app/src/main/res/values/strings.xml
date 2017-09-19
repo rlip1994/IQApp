@@ -1,11 +1,14 @@
 <resources>
     <string name="app_name">SMART</string>
-    <string name="child_Name">Nombre Completo</string>
-    <string name="child_age">Edad</string>
-    <string name="child_province">Localidad</string>
-    <string name="child_school">Escuela</string>
-    <string name="tiempo">30</string>
-    <string name="pregunta_titulo">Pregunta</string>
-    <string name="enunciado_pregunta">Enunciado</string>
-    <string name="opcion_respuesta_texto">respuesta</string>
+    <string name="child_Name">Name_Lastname</string>
+    <string name="child_age">Age</string>
+    <string name="child_province">Location</string>
+    <string name="child_school">School</string>
+    <string name="time">45</string>
+    <string name="question_title">Question</string>
+    <string name="question">statement</string>
+    <string name="option_answ">option</string>
+    <string name="Start">Start</string>
+    <string name="Category">Choose a category </string>
+    <string name="Child">Choose a kid </string>
 </resources>
