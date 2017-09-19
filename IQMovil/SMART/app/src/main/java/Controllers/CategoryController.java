@@ -14,6 +14,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.smartapp.web.smart.MainActivity;
+import com.smartapp.web.smart.categoryList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,7 +32,7 @@ import utils.Const;
 
 /**
  * Created by kanat on 16/9/2017.
- * Category's controller
+ * CategoryView's controller
  */
 
 public class CategoryController {
@@ -41,20 +42,23 @@ public class CategoryController {
     private String TAG = "CategoriesController";
     private String tag_json_arry = "jarray_req";
 
-    public Activity categoryActivity;
+    private categoryList categoryActivity;
 
 
-    //private ArrayList<Category> categories;
+    //private ArrayList<CategoryView> categories;
 
      /**
       * **/
 
-    public CategoryController() throws UnknownHostException, ExecutionException, InterruptedException {
+    public CategoryController(categoryList pCategoryActivity) throws UnknownHostException, ExecutionException, InterruptedException {
         this.categories  = new ArrayList<Category>();
+        this.categoryActivity = pCategoryActivity;
         getAllCategories();
     }
+
+
     private void getAllCategories() {
-        //showProgressDialog();
+        this.categoryActivity.showProgressBar();
         JsonArrayRequest req = new JsonArrayRequest(Const.URL_CATEGORIES,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -62,17 +66,18 @@ public class CategoryController {
                         Log.d(TAG, response.toString());
                         try {
                             getArrayCategories(response.toString());
-                            showAlertMessage(categories.toString());
+                            createCategoryListView();
+                            setListViewActivity();
                         } catch (JSONException e) {
-
+                            showAlertMessage("Error al convertir string en JSON");
                         }
-                        //hideProgressDialog();
+                        hideProgressDialog();
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
-                Toast.makeText(MainActivity.activity,"Error: " + error.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.activity,"Error: " + error.toString(),Toast.LENGTH_LONG).show();
                 //hideProgressDialog();
             }
         });
@@ -86,6 +91,10 @@ public class CategoryController {
 
         // Cancelling request
         // ApplicationController.getInstance().getRequestQueue().cancelAll(tag_json_arry);
+    }
+
+    private void hideProgressDialog() {
+        this.categoryActivity.hiddenProgressBar();
     }
 
     private void getArrayCategories(String pString) throws JSONException {
@@ -104,10 +113,21 @@ public class CategoryController {
         }
     }
     public  void showAlertMessage(String pMessage){
-        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.activity).create();
+        AlertDialog alertDialog = new AlertDialog.Builder(this.categoryActivity).create();
         alertDialog.setTitle("Alert");
         alertDialog.setMessage(pMessage);
         alertDialog.show();
     }
+
+    private void createCategoryListView() {
+        for ( Category category : this.categories) {
+            this.categoryActivity.addCategoryViewData(category.getNameCategory());
+        }
+    }
+    private void setListViewActivity(){
+        this.categoryActivity.setListAdapter();
+        this.categoryActivity.setListClickListener();
+    }
+
 
 }

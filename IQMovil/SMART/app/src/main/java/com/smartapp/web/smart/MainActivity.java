@@ -44,11 +44,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activity = this;
         setContentView(R.layout.activity_main);
-        this.txtView = (TextView) findViewById(R.id.sample_text);
+        //this.txtView = (TextView) findViewById(R.id.sample_text);
 
         try {
             CategoryController categoryController;
-            categoryController =  new CategoryController();
+            //categoryController =  new CategoryController();
 
         } catch (Exception e) {
             //e.printStackTrace();

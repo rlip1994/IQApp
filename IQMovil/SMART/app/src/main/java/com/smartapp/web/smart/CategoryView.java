@@ -4,12 +4,12 @@ package com.smartapp.web.smart;
  * Created by klcho.o on 16/9/2017.
  */
 
-public class Category {
+public class CategoryView {
 
     private String Category;
     private int Image;
 
-    public Category(String pCategory, int pImage) {
+    public CategoryView(String pCategory, int pImage) {
         this.setImage(pImage);
         this.setCategory(pCategory);
     }
