@@ -4,33 +4,38 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
+
+import Controllers.UserController;
 
 
 public class childList extends AppCompatActivity {
 
     private ListView list;
+    private ArrayList<Child> dataView =  new ArrayList<Child>();
+    private ProgressBar progressbar;
+    private UserController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.adapter_child_list);
-
-        // .... ingresar los datos a un arreglo
-        ArrayList<Child> data = new ArrayList<Child>();
-
-        data.add(new Child("Niño1","8","escuela1","SJ"));
-        data.add(new Child("Niño2","9","escuela2","Al"));
-        data.add(new Child("Niño3","10","escuela3","P"));
-
-        //..... agregar los datos al layout
-
         list = (ListView) findViewById(R.id.ListView_childlist);
-        list.setAdapter(new Adapter_childList(this, R.layout.child_category, data){
+        this.progressbar = (ProgressBar) findViewById(R.id.progressbar);
+        this.hiddenProgressBar();
+        this.controller =  new UserController(this);
+
+    }
+    public void addListAdapter(){
+        list.setAdapter(new Adapter_childList(this, R.layout.child_category, this.dataView){
             @Override
             public void onEntrada (Object child, View view) {
                 if (child != null) {
@@ -48,25 +53,32 @@ public class childList extends AppCompatActivity {
                     TextView school = (TextView) view.findViewById(R.id.textView_school);
                     if (school != null)
                         school.setText(((Child) child).getSchool());
-
                 }
             }
         });
+    }
 
-        //.... al seleccionar un item ir a otro layourt
+    public void setListClickListener(){
         list.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> pariente, View view, int posicion, long id) {
                 Child itemElegido = (Child) pariente.getItemAtPosition(posicion);
-
                 Intent Activity = new Intent(getApplicationContext(), categoryList.class);
                 startActivity(Activity);
                 finish();
             }
         });
+    }
 
-
+    public void addDataListView(String pId, String pName, String pGrade, String pSchool){
+        this.dataView.add(new Child(pName,pId,pSchool,pGrade));
     }
 
 
+    public void  showProgressBar(){
+        this.progressbar.setVisibility(View.VISIBLE);
+    }
+    public void  hiddenProgressBar(){
+        this.progressbar.setVisibility(View.INVISIBLE);
+    }
 }

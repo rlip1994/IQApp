@@ -2,6 +2,7 @@ package com.smartapp.web.smart;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,6 +32,7 @@ public class categoryList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        showAlertMessage("Iniciando class ");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.adapter_category);
         list = (ListView) findViewById(R.id.ListView_Categorylist);
@@ -40,18 +42,12 @@ public class categoryList extends AppCompatActivity {
         try {
             this.controller = new CategoryController(this);
         } catch (UnknownHostException e) {
-            //e.printStackTrace();
+            showAlertMessage("Problemas en servidor"+e.getMessage());
         } catch (ExecutionException e) {
-            //e.printStackTrace();
+            showAlertMessage("Error en ejecución:"+e.getMessage());
         } catch (InterruptedException e) {
             //e.printStackTrace();
         }
-
-
-
-
-
-
 
     }
     /**
@@ -94,4 +90,11 @@ public class categoryList extends AppCompatActivity {
              }
          });
      }
+
+    public  void showAlertMessage(String pMessage){
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Alert");
+        alertDialog.setMessage(pMessage);
+        alertDialog.show();
+    }
 }
