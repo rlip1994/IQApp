@@ -14,6 +14,7 @@ public class User {
 
     private String nameUser;
     private ArrayList<Kid> kidsUser;
+    private Kid currentKid;
 
     public User(String pNameUser, int pIdUser){
         this.idUser = pIdUser;
@@ -41,5 +42,18 @@ public class User {
                 ", nameUser='" + nameUser + '\'' +
                 ", kidsUser=" + kidsUser +
                 '}';
+    }
+
+    public void setCurrentKid(Integer pIdKid) {
+        for (Kid kid : this.kidsUser) {
+            if(kid.getIdKid()==pIdKid){
+                this.currentKid =kid ;
+                break;
+            }
+        }
+    }
+
+    public Kid getCurrentKid() {
+        return this.currentKid;
     }
 }

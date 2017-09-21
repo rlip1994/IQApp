@@ -32,7 +32,6 @@ public class categoryList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        showAlertMessage("Iniciando class ");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.adapter_category);
         list = (ListView) findViewById(R.id.ListView_Categorylist);
@@ -84,9 +83,10 @@ public class categoryList extends AppCompatActivity {
              @Override
              public void onItemClick(AdapterView<?> pariente, View view, int posicion, long id) {
                  CategoryView elegido = (CategoryView) pariente.getItemAtPosition(posicion);
+                 controller.setCurrentCategory(elegido.getCategory());
                  Intent intent = new Intent(getApplicationContext(),questionsText.class);
                  startActivity(intent);
-                 finish();
+                 //finish();
              }
          });
      }

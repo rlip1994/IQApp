@@ -62,7 +62,8 @@ public class childList extends AppCompatActivity {
         list.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> pariente, View view, int posicion, long id) {
-                Child itemElegido = (Child) pariente.getItemAtPosition(posicion);
+                Child itemSelected = (Child) pariente.getItemAtPosition(posicion);
+                controller.setCurrentKid(Integer.valueOf(itemSelected.getAge())); // Actually is idKid
                 Intent Activity = new Intent(getApplicationContext(), categoryList.class);
                 startActivity(Activity);
                 finish();

@@ -8,5 +8,6 @@ public class Const {
 	public static final String URL_IMAGE = "http://api.androidhive.info/volley/volley-image.jpg";
 	public static final String URL_CATEGORIES = SERVER_ADDRESS+"categories/";
 	public static final String URL_USERS = SERVER_ADDRESS +"users/";
+	public static final String URL_QUESTIONS = SERVER_ADDRESS +"questions/";
 
 }

@@ -9,8 +9,11 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var Tasks=require('./routes/Tasks');
 var Students=require('./routes/Students');
-var categories = require('./routes/categories')
+var categories = require('./routes/categories');
+var questions = require('./routes/questions');
 var app = express();
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -32,6 +35,7 @@ app.use('/users', users);
 app.use('/Tasks',Tasks);
 app.use('/Students',Students);
 app.use('/categories',categories);
+app.use('/questions',questions);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

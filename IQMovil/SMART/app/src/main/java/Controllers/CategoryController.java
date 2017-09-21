@@ -41,6 +41,7 @@ public class CategoryController {
     private ArrayList<Category> categories;
     private String TAG = "CategoriesController";
     private String tag_json_arry = "jarray_req";
+    public static Category currentCategory;
 
     private categoryList categoryActivity;
 
@@ -99,6 +100,7 @@ public class CategoryController {
 
     private void getArrayCategories(String pString) throws JSONException {
         JSONArray arrayJson = new JSONArray(pString);
+        arrayJson = arrayJson.getJSONArray(0);
         //Declare temporal variables
         int idCategory = 0;
         String nameCategory = "";
@@ -130,4 +132,12 @@ public class CategoryController {
     }
 
 
+    public void setCurrentCategory(String category) {
+        for (Category cat: categories) {
+            if (cat.getNameCategory() == category){
+                this.currentCategory = cat;
+                break;
+            }
+        }
+    }
 }

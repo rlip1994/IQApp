@@ -17,6 +17,7 @@ public class Question {
     private int pointQuestion;
     private Time speedQuestion;
     private Response responseQuestion;
+    private String[] alternativeResponse;
 
     /**
      * Method: Contructor
@@ -54,5 +55,27 @@ public class Question {
         this.idQuestion = pIdQuestion;
         this.textQuestion = pTextQuestion;
         this.responseQuestion =  new Response(pIdResponse,pTextReponse,pImageResponse);
+    }
+
+    /**GETTERS AND SETTERS**/
+
+    public int getIdQuestion() {
+        return idQuestion;
+    }
+
+    public String getTextQuestion() {
+        return textQuestion;
+    }
+
+    public Response getResponseQuestion() {
+        return responseQuestion;
+    }
+
+    public void setAlternativeResponse(String[] alternativeResponse) {
+        this.alternativeResponse = alternativeResponse;
+    }
+
+    public String[] getAlternativeResponse() {
+        return alternativeResponse;
     }
 }

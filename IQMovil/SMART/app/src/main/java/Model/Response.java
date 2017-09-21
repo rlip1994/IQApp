@@ -34,4 +34,8 @@ public class Response {
         this.textResponse = pTextReponse;
         this.imageResponse = pImageResponse;
     }
+
+    public String getTextResponse() {
+        return textResponse;
+    }
 }
