@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,22 +7,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="app.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
-<body>
-  <ul class="menu">
-    <li><a href="#!/view1">view1</a></li>
-    <li><a href="#!/view2">view2</a></li>
-  </ul>
 
-  <!--[if lt IE 7]>
+<body>
+  <div class="container_index">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Usuario</label>
+            <div class="cols-sm-10" id="input_name">
+                    <input type="text" class="form-control" name="name" id="name"/>
+            </div>
+        </div>
+        <div class="form-group" >
+            <label for="psw" class="cols-sm-2 control-label">Contraseña</label>
+            <div class="cols-sm-10" id="input_psw">
+                <input type="password" class="form-control" name="name" id="psw"/>
+            </div>
+        </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+            <a href="#">¿Olvidó su contraseña?</a>
+        </div>
+      </div>
+      <div class="form-group" id="btn-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default" id="btn_login">Iniciar</button>
+            <button type="submit" class="btn btn-default" id="btn_singIn">Registrarse</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-sm-2 col-sm-offset-5 col-sm-offset-2">
+    <img src="buho_.png" height="357" width="280" >
+  </div>
+  <!--[if lt IE 7]
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <div ng-view></div>
-
-  <div>Angular seed app: v<span app-version></span></div>
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
