@@ -17,11 +17,116 @@ body {
   padding-right: 15px;
 }
 
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 10px;
+.btn-menu{
+  background-color: #0088CC ;
+  font-family: "Cooper Black";
+  font-size: 20px;
+  color: #F7F7F7;
+  margin-bottom: 20px;
 }
+
+.btn-profile{
+  background-color: #666798 ;
+  font-family: "Cooper Black";
+  font-size: 20px;
+  color: #F7F7F7;
+}
+.btn-kids{
+  background-color: #6ACA25 ;
+  font-family: "Cooper Black";
+  font-size: 20px;
+  color: #F7F7F7;
+}
+.btn-exit{
+  background-color: #ca5a4c;
+  font-family: "Cooper Black";
+  font-size: 20px;
+  color: #F7F7F7;
+}
+
+.btn_update{
+  background-color: #cc761b;
+  font-family: "Cooper Black";
+  font-size: 19px;
+  color: #F7F7F7;
+  margin-bottom: 20px;
+}
+
+.btn_accept{
+  background-color:#6ACA25;
+  font-family: "Cooper Black";
+  font-size: 19px;
+  color: #F7F7F7;
+  margin-bottom: 20px;
+}
+.btn_cancel{
+  background-color: #ca5a4c;
+  font-family: "Cooper Black";
+  font-size: 19px;
+  color: #F7F7F7;
+  margin-bottom: 20px;
+  margin-left: 5px;
+}
+.btn_back{
+  background-color: #cc3f60;
+  font-family: "Cooper Black";
+  font-size: 19px;
+  color: #F7F7F7;
+  margin-bottom: 20px;
+}
+#form_profile{
+  margin-top: 20px;
+}
+#btn_add{
+  background-color:#6ACA25;
+  font-family: "Cooper Black";
+  font-size: 19px;
+  color: #F7F7F7;
+  margin-top: 10px;
+  margin-bottom:5px;
+}
+
+#btn_search{
+  background-color: #6976ca;
+  font-family: "Cooper Black";
+  font-size: 19px;
+  color: #F7F7F7;
+  margin-top: 10px;
+  margin-bottom:5px;
+}
+h2{
+  font-family: "Cooper Black";
+}
+.list-group-kids{
+  font-family: "Verdana";
+  font-size: 14px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+}
+
+#list_infoKids{
+  background-color: #ffff;
+  color: #1210a8;
+  border-style: solid;
+  border-color: #1210a8;
+  border-width: 5px;
+  border-radius: 10px;
+}
+
+.navbar-default{
+ background-color: transparent;
+  margin-top: 10px;
+  border-style: none;
+}
+
+#search_input{
+  width: 200px;
+  height: 40px;
+  font-family: "Verdana";
+  font-size: 16px;
+}
+
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
   margin-top: 0;

@@ -22,12 +22,32 @@ angular
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
-        controllerAs: 'main'
+        controllerAs: 'vm'
       })
       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
-        controllerAs: 'about'
+        controllerAs: 'vm'
+      })
+      .when('/profile', {
+        templateUrl: 'views/profile.html',
+        controller: 'ProfileCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/kids', {
+        templateUrl: 'views/kids.html',
+        controller: 'KidsCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/kidsProfile', {
+        templateUrl: 'views/kidsProfile.html',
+        controller: 'kidsProfileCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/kidsAdd', {
+        templateUrl: 'views/kidsAdd.html',
+        controller: 'kidsAdd',
+        controllerAs: 'vm'
       })
       .otherwise({
         redirectTo: '/'
