@@ -4,7 +4,7 @@ var category={
 
 getAllCategories:function(callback){
 
-return db.query("call getAllCategories()",callback);
+return db.query("Select * from categories",callback);
 
 }};
 

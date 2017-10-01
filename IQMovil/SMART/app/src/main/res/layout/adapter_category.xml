@@ -7,6 +7,10 @@
     android:layout_height="match_parent"
     tools:context="com.smartapp.web.smart.childList"
     android:background="@drawable/rainbow">
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressbar" />
 
     <TextView
         android:id="@+id/textView__choooseCateg"
