@@ -17,18 +17,25 @@ angular.module('iqwebApp')
 
     this.edit=true;
     this.btnAcceptCancel=false;
+    this.passwordNew = false;
+    this.passwordConfirm = false;
+    
 
     
 
     function editProfile(){
       this.edit = false;
       this.btnAcceptCancel = !this.edit;
+      this.passwordNew = !this.edit;
+      this.passwordConfirm = !this.edit;
       
     }
 
     function cancelUpdate(){
       this.edit = true;
       this.btnAcceptCancel = !this.edit;
+      this.passwordNew = !this.edit;
+      this.passwordConfirm = !this.edit;
     }
 
 

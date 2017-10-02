@@ -1,13 +1,14 @@
-var db=require('../dbconnection');
+var db = require('../dbconnection');
 
-var user={
+var user = {
 
-getUserxKids:function(idUser,callback){
+  getUserxKids: function (idUser, callback) {
 
-return db.query("call getAllKidsxUser(?)",[idUser],callback);
+    return db.query("call getAllKidsxUser(?)", [idUser], callback);
 
-}};
+  }
+};
 
-module.exports=user;
+module.exports = user;
 
 
