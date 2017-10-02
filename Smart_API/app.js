@@ -11,6 +11,7 @@ var Tasks=require('./routes/Tasks');
 var Students=require('./routes/Students');
 var categories = require('./routes/categories');
 var questions = require('./routes/questions');
+var userProfile = require('./routes/userProfile');
 var app = express();
 
 
@@ -36,6 +37,7 @@ app.use('/Tasks',Tasks);
 app.use('/Students',Students);
 app.use('/categories',categories);
 app.use('/questions',questions);
+app.use('/userProfile',userProfile);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
