@@ -39,7 +39,7 @@ angular.module('iqwebApp')
       this.passwordNew = !this.edit;
       this.passwordConfirm = !this.edit;
 
-      $http.get('http://localhost:3000/userProfile/1').then(function(response){
+      $http.get('http://localhost:3000/userProfile/63').then(function(response){
         console.log(response.data[0][0]);
         $scope.vm.user=response.data[0][0];
       });
