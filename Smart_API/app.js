@@ -17,6 +17,9 @@ var getAllKids = require('./routes/getAllKids');
 var addKid = require('./routes/addKid');
 var modKid = require('./routes/modKid');
 var getKid = require('./routes/getKid');
+var getCountry = require('./routes/getCountry');
+var getRegions = require('./routes/getRegions');
+var getCities = require('./routes/getCities');
 var app = express();
 
 
@@ -48,6 +51,9 @@ app.use('/getAllKids',getAllKids);
 app.use('/addKid',addKid);
 app.use('/modKid',modKid);
 app.use('/getKid',getKid);
+app.use('/getCountry',getCountry);
+app.use('/getRegions',getRegions);
+app.use('/getCities',getCities);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

@@ -8,18 +8,25 @@
  * Controller of the iqwebApp
  */
 angular.module('iqwebApp')
-  .controller('KidsCtrl', function ($http) {
+  .controller('KidsCtrl', function ($scope,$http) {
   
 
-    this.kids_profile=kids_profile;
+    
+    this.start=start;
+
+    this.kids;
+    
 
 
     
+    function start(){
+      $http.get('http://localhost:3000/getAllKids').then(function(response){
+        
+        $scope.vm.kids=response.data[0];
+      });
 
-    function kids_profile(){
-      
     }
-
+    
     function cancelUpdate(){
       
     }

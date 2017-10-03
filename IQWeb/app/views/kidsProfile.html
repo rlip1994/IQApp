@@ -1,42 +1,73 @@
-<form role="form" id="form_profileKids">
+<form role="form" id="form_profileKids" ng-init="vm.start()">
     <h2 align="center">Información Personal</h2>
     <div class="form-group">
         <label for="username_kid">Nombre</label>
-        <input type="text" class="form-control" id="username_kid" ng-model="kid.name" ng-disabled="vm.edit">
+        <input type="text" class="form-control" id="username_kid" ng-model="vm.getkid.name" ng-disabled="vm.edit">
     </div>
     <div class="form-group">
-        <label for="lastname_kid">Apellidos</label>
-        <input type="text" class="form-control" id="lastname_kid" ng-model="kid.lastname" ng-disabled="vm.edit">
+        <label for="lastname_kid">Primer Apellido</label>
+        <input type="text" class="form-control" id="lastname_kid" ng-model="vm.getkid.lastname1" ng-disabled="vm.edit">
     </div>
+    <div class="form-group">
+        <label for="lastname2_kid">Primer Apellido</label>
+        <input type="text" class="form-control" id="lastname2_kid" ng-model="vm.getkid.lastname2" ng-disabled="vm.edit">
+    </div>
+    
     <div class="form-group">
         <label for="select_age_kid">Edad</label>
-        <input type="number" class="form-control" id="select_age_kid" ng-model="kid.age" ng-disabled="vm.edit">
+        <input type="number" class="form-control" id="select_age_kid" ng-model="vm.getkid.age" ng-disabled="vm.edit">
     </div>
     <div class="form-group">
-        <label for="telephone">Teléfono</label>
-        <input type="number" class="form-control" id="telephone_kid" ng-model="kid.telephone" ng-disabled="vm.edit">
+        <label for="school">Escuela</label>
+        <input type="text" class="form-control" id="school" ng-model="vm.getkid.school" ng-disabled="vm.edit">
+    </div>
+    <div class="form-group">
+        <label for="grade">Grado</label>
+        <input type="text" class="form-control" id="grade" ng-model="vm.getkid.grade" ng-disabled="vm.edit">
     </div>
     <div class="form-group">
         <label for="location">Residencia</label>
-        <input type="text" class="form-control" id="location" ng-model="kid.location" ng-disabled="vm.edit">
+        <input type="text" class="form-control" id="location" ng-model="vm.getkid.detail1" ng-disabled="vm.edit">
     </div>
+    <div class="form-group">
+        <label for="zipcode">Código Postal</label>
+        <input type="text" class="form-control" id="zipcode" ng-model="vm.getkid.zipCode" ng-disabled="vm.edit">
+    </div>
+    <div class="form-group">
+        <label for="city">Ciudad</label>
+        <input type="text" class="form-control" id="city" ng-model="vm.getkid.city" ng-disabled="vm.edit">
+    </div>
+    <div class="form-group">
+        <label for="region">Región</label>
+        <input type="text" class="form-control" id="region" ng-model="vm.getkid.region" ng-disabled="vm.edit">
+    </div>
+    <div class="form-group">
+        <label for="country">Pais</label>
+        <input type="text" class="form-control" id="country" ng-model="vm.getkid.country" ng-disabled="vm.edit">
+    </div>
+    <div class="form-group" >
+        <label for="selCountry">Pais:</label>
+        <select ng-click="vm.loadRegions()" class="form-control" ng-model="vm.selectedCountry" ng-options="x.name for x in vm.getCountry">
+        </select>
+        
+      </div>
 
     <h2 align="center">Favoritos</h2>
     <div class="form-group">
         <label for="fav_topic_kid">Tema</label>
-        <input type="text" class="form-control" id="fav_topic_kid" ng-model="kid.topic" ng-disabled="vm.edit">
+        <input type="text" class="form-control" id="fav_topic_kid" ng-model="vm.getkid.favoriteTopic" ng-disabled="vm.edit">
     </div>
     <div class="form-group">
         <label for="fav_subject_kid">Asignatura</label>
-        <input type="text" class="form-control" id="fav_subject_kid" ng-model="kid.subject" ng-disabled="vm.edit">
+        <input type="text" class="form-control" id="fav_subject_kid" ng-model="vm.getkid.favoriteSubject" ng-disabled="vm.edit">
     </div>
     <div class="form-group">
         <label for="fav_hobbie_kid">Pasa Tiempo</label>
-        <input type="text" class="form-control" id="fav_hobbie_kid" ng-model="kid.hobbie" ng-disabled="vm.edit">
+        <input type="text" class="form-control" id="fav_hobbie_kid" ng-model="vm.getkid.favoriteHobbie" ng-disabled="vm.edit">
     </div>
     <div class="form-group">
         <label for="fav_other_kid">Otra información</label>
-        <textarea class="form-control" rows="5" id="fav_other_kid" ng-model="kid.other" ng-disabled="vm.edit"></textarea>
+        <textarea class="form-control" rows="5" id="fav_other_kid" ng-model="vm.getkid.otherInfo" ng-disabled="vm.edit"></textarea>
     </div>
 
     <div class="form-group">

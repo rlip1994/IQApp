@@ -1,4 +1,4 @@
-<div ng-init="infoKids=[{id:1,name:'Jani',condition:'Evaluado'},{id:2,name:'Hege',condition:'No Evaluado'},{id:3,name:'Kai',condition:'Evaluado'}]">
+<div ng-init="vm.start()">
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <form class="navbar-form navbar-left">
@@ -12,11 +12,12 @@
   </nav>
 
   <h2 align="center">Lista de niños encuestados</h2>
-  <div class="list-group-kids" ng-repeat="x in infoKids">
-    <a ng-click="kids_profile()" ng-href="#!/kidsProfile" class="list-group-item " id="list_infoKids">
-      <p class="list-group-item-text">ID: {{ x.id }}</p>
-      <p class="list-group-item-text">Nombre: {{ x.name }}</p>
-      <p class="list-group-item-text">Estado: {{ x.condition }}</p>
+  <div class="list-group-kids" ng-repeat="x in vm.kids">
+    <a ng-href="#!/kidsProfile/{{x.idplayer}}" class="list-group-item " id="list_infoKids">
+      <p class="list-group-item-text">Cédula: {{x.idCard}}</p>
+      <p class="list-group-item-text">Nombre: {{x.name}} {{x.lastname1}} {{x.lastname2}}</p>
+      <p class="list-group-item-text">Escuela: {{x.school}}</p>
+      <p class="list-group-item-text">Pais: {{x.country}}</p>
     </a>
   </div>
 </div>
