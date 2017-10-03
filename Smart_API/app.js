@@ -12,6 +12,11 @@ var Students=require('./routes/Students');
 var categories = require('./routes/categories');
 var questions = require('./routes/questions');
 var userProfile = require('./routes/userProfile');
+var userProfileMod = require('./routes/userProfileMod');
+var getAllKids = require('./routes/getAllKids');
+var addKid = require('./routes/addKid');
+var modKid = require('./routes/modKid');
+var getKid = require('./routes/getKid');
 var app = express();
 
 
@@ -38,6 +43,11 @@ app.use('/Students',Students);
 app.use('/categories',categories);
 app.use('/questions',questions);
 app.use('/userProfile',userProfile);
+app.use('/userProfileMod',userProfileMod);
+app.use('/getAllKids',getAllKids);
+app.use('/addKid',addKid);
+app.use('/modKid',modKid);
+app.use('/getKid',getKid);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
