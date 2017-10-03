@@ -20,6 +20,8 @@ var getKid = require('./routes/getKid');
 var getCountry = require('./routes/getCountry');
 var getRegions = require('./routes/getRegions');
 var getCities = require('./routes/getCities');
+var getSchool = require('./routes/getSchool');
+var getGrades = require('./routes/getGrades');
 var app = express();
 
 
@@ -54,6 +56,8 @@ app.use('/getKid',getKid);
 app.use('/getCountry',getCountry);
 app.use('/getRegions',getRegions);
 app.use('/getCities',getCities);
+app.use('/getSchool',getSchool);
+app.use('/getGrades',getGrades);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

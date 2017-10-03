@@ -1,19 +1,22 @@
 var express = require('express');
 var router = express.Router();
-var category=require('../models/getAllKids');
-router.get('/',function(req,res,next){
+var user=require('../models/getAllKids');
 
-        category.sp_getAllKids(function(err,rows){
+/* GET users listing. */
+router.get('/:idUsers?', function(req, res, next) {
+  if(req.params.idUsers){
 
-            //console.log(req.body);
-            if(err)
-            {
-                res.json(err);
-            }
-            else{
-                    res.json(rows);//return JSon categories
-            }
-        });
+    user.sp_getAllKids(req.params.idUsers,function(err,rows){
+        if(err)
+        {
+            res.json(err);
+        }
+        else{
+            res.json(rows);
+        }
+    });
+}
 });
 
-module.exports=router;
+
+module.exports = router;
