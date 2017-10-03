@@ -39,7 +39,7 @@ angular
         controller: 'KidsCtrl',
         controllerAs: 'vm'
       })
-      .when('/kidsProfile', {
+      .when('/kidsProfile/:idkid', {
         templateUrl: 'views/kidsProfile.html',
         controller: 'kidsProfileCtrl',
         controllerAs: 'vm'
