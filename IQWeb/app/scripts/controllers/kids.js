@@ -11,10 +11,10 @@ angular.module('iqwebApp')
   .controller('KidsCtrl', function ($scope,$http) {
   
 
+    var vm = this;
     
-    this.start=start;
-
-    this.kids;
+    vm.start=start;
+    vm.kids;
     
 
 
