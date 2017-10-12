@@ -8,61 +8,130 @@
  * Controller of the iqwebApp
  */
 angular.module('iqwebApp')
-  .controller('ProfileCtrl', function ($scope,$http) {
-  
+  .controller('ProfileCtrl', function ($window, $scope, $http, $mdDialog) {
 
-    this.editProfile=editProfile;
-    this.cancelUpdate=cancelUpdate;
-    this.acceptUpdate=acceptUpdate;
-    this.start=start;
+    var vm = this;
 
+    vm.editProfile = editProfile;
+    vm.cancelUpdate = cancelUpdate;
+    vm.acceptUpdate = acceptUpdate;
+    vm.changePassword = changePassword;
 
-    this.edit=true;
-    this.btnAcceptCancel=false;
-    this.passwordNew = false;
-    this.passwordConfirm = false;
-    this.user;
-    
+    vm.start = start;
 
 
+    vm.edit = true;
+    vm.changePass = false;
+    vm.passwordNew = false;
+    vm.btnAcceptCancel = false;
+    vm.user;
 
-    function start(){
-      $http.get('http://localhost:3000/userProfile/1').then(function(response){
-        
-        $scope.vm.user=response.data[0][0];
+
+
+
+    function start() {
+      $http.get('http://localhost:3000/userProfile/63').then(function (response) {
+
+        $scope.vm.user = response.data[0][0];
       });
     }
 
-    function editProfile(){
-      this.edit = false;
-      this.btnAcceptCancel = !this.edit;
-      this.passwordNew = !this.edit;
-      this.passwordConfirm = !this.edit;
+    function editProfile() {
+      vm.edit = false;
+      vm.changePass = true;
+      vm.btnAcceptCancel = !vm.edit;
 
-      $http.get('http://localhost:3000/userProfile/63').then(function(response){
-        console.log(response.data[0][0]);
-        $scope.vm.user=response.data[0][0];
+      $http.get('http://localhost:3000/userProfile/63').then(function (response) {
+
+        $scope.vm.user = response.data[0][0];
       });
-      
+
     }
 
-    function cancelUpdate(){
-      this.edit = true;
-      this.btnAcceptCancel = !this.edit;
-      this.passwordNew = !this.edit;
-      this.passwordConfirm = !this.edit;
+    function succesDialog() {
+
+
+      var alert = $mdDialog.alert()
+        .clickOutsideToClose(true)
+        .title('Perfil Modificado')
+        .textContent('Se ha modificado el perfil de manera exitosa')
+        .ariaLabel('Alert Dialog Demo')
+        .ok('Aceptar')
+
+      $mdDialog.show(alert).then(function () {
+        $window.location.reload();
+      });
+    };
+
+    function cancelUpdate() {
+      vm.edit = true;
+      vm.btnAcceptCancel = !vm.edit;
+      vm.passwordNew = !vm.edit;
+      vm.passwordConfirm = !vm.edit;
     }
 
-    function acceptUpdate(){
-      
-      
-      $http.post('http://localhost:3000/userProfileMod',this.user).then(function(response){
-        //console.log(response.data);
+    function changePassword() {
+      vm.passwordNew = !vm.passwordNew;
+      vm.user.password = '';
+    }
+
+    function validUser() {
+      return $http.get('http://localhost:3000/getValidUser/' + 63 + '/' + vm.user.password).then(function (response) {
+        if (response.data[0][0]) {
+          return response.data[0][0];
+        }
       });
     }
 
-   
+    function doUpdate() {
+      if (vm.passwordNew) {
+
+        var prom = validUser();
+
+        if (vm.passwordChange === vm.passwordConfirm) {
+          vm.user.password = vm.passwordChange;
+        }
+        return prom.then(function (result) {
+          if (result) {
+            return $http.post('http://localhost:3000/userProfileMod', vm.user).then(function (response) {
+
+              return response;
+
+            })
+          }
+        });
+
+      } else {
+        return $http.post('http://localhost:3000/userProfileMod', vm.user).then(function (response) {
+
+          return response;
+
+        })
+      }
+
+
+
+    }
+
+    function acceptUpdate() {
+
+      var prom = doUpdate();
+      var ok = prom.then(function (result) {
+        if (result) {
+          return true;
+        }
+      });
+      if (ok) {
+        succesDialog();
+
+      }
+
+
+
+    }
+
+
 
 
   }
-);
+  );
