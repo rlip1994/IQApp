@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var user=require('../models/getAllKids');
+var kid = require('../models/getKid');
 
 /* GET users listing. */
 router.get('/:idUsers?', function(req, res, next) {
@@ -16,7 +17,9 @@ router.get('/:idUsers?', function(req, res, next) {
         }
     });
 }
+
 });
+
 
 
 module.exports = router;

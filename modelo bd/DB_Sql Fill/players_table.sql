@@ -1,0 +1,13 @@
+INSERT INTO `mydb`.`players` (`name`, `age`, `idgrade`, `lastname1`, `lastname2`, `enable`) VALUES ('Niño 1 ', '8', '2', 'A_niño1', 'A2_niño1', '1');
+INSERT INTO `mydb`.`players` (`name`, `age`, `idgrade`, `lastname1`, `lastname2`, `enable`) VALUES ('Niño 2', '8', '2', 'A_niño2', 'A2_niño2', '1');
+INSERT INTO `mydb`.`players` (`name`, `age`, `idgrade`, `lastname1`, `lastname2`, `enable`) VALUES ('Niño 3', '9', '3', 'A_niño3', 'A2_niño3', '1');
+INSERT INTO `mydb`.`players` (`name`, `age`, `idgrade`, `lastname1`, `lastname2`, `enable`) VALUES ('Niño 4', '9', '3', 'A_niño4', 'A2_niño4', 1);
+INSERT INTO `mydb`.`players` (`name`, `age`, `idgrade`, `lastname1`, `lastname2`, `enable`) VALUES ('Niño 5', '10', '4', 'A_niño5', 'A2_niño5', 1);
+INSERT INTO `mydb`.`players` (`name`, `age`, `idgrade`, `lastname1`, `lastname2`, `enable`) VALUES ('Niño 6', '10', '4', 'A_niño6', 'A2_niño6', 1);
+INSERT INTO `mydb`.`players` (`name`, `age`, `idgrade`, `lastname1`, `lastname2`, `enable`) VALUES ('Niño 7', '11', '5', 'A_niño7', 'A2_niño7', 1);
+INSERT INTO `mydb`.`players` (`name`, `age`, `idgrade`, `lastname1`, `lastname2`, `enable`) VALUES ('Niño 8', '11', '5', 'A_niño8', 'A2_niño8', 1);
+INSERT INTO `mydb`.`players` (`name`, `age`, `idgrade`, `lastname1`, `lastname2`, `enable`) VALUES ('Niño 9', '12', '6', 'A_niño9', 'A2_niño9', 1);
+INSERT INTO `mydb`.`players` (`name`, `age`, `idgrade`, `lastname1`, `lastname2`, `enable`) VALUES ('Niño 10', '12', '5', 'A_niño10', 'A2_niño10', 1);
+INSERT INTO `mydb`.`players` (`name`, `age`, `idgrade`, `lastname1`, `lastname2`, `enable`) VALUES ('Niño 11', '13', '6', 'A_niño11', 'A2_niño11', 1);
+INSERT INTO `mydb`.`players` (`name`, `age`, `idgrade`, `lastname1`, `lastname2`, `enable`) VALUES ('Niño 12', '13', '5', 'A_niño12', 'A2_niño12', 1);
+commit;
