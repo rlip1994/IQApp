@@ -50,6 +50,11 @@ angular
         controller: 'kidsAdd',
         controllerAs: 'vm'
       })
+      .when('/results', {
+        templateUrl: 'views/results.html',
+        controller: 'resultsCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({
         redirectTo: '/'
       });

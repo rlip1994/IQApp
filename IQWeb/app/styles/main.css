@@ -97,6 +97,9 @@ body {
 h2{
   font-family: "Cooper Black";
 }
+h6{
+  font-family: "Cooper Black";
+}
 .list-group-kids{
   font-family: "Verdana";
   font-size: 14px;
@@ -187,4 +190,18 @@ h2{
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+.resultsContainer
+{
+  margin: 35px;
+  padding: 20px;
+}
+
+.filterContainer
+{
+  display: flex;
+  justify-content: space-around;
+  align-items:center;
+  flex-direction: row;
 }
