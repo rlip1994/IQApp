@@ -1,3 +1,15 @@
+INSERT INTO `countries` (`name`) VALUES ("Japan"),("Mozambique"),("Cocos (Keeling) Islands"),("Ireland"),("Belize"),("Finland"),("Dominica"),("Dominica"),("Jersey"),("Nigeria");
+INSERT INTO `countries` (`name`) VALUES ("Japan"),("Mauritius"),("Mali"),("Uzbekistan"),("Saint Vincent and The Grenadines"),("Micronesia"),("Martinique"),("Antigua and Barbuda"),("Turkey"),("Christmas Island");
+INSERT INTO `countries` (`name`) VALUES ("Laos"),("Saudi Arabia"),("Laos"),("India"),("United States Minor Outlying Islands"),("Maldives"),("Mozambique"),("Nicaragua"),("Denmark"),("Bermuda");
+INSERT INTO `countries` (`name`) VALUES ("Moldova"),("Niue"),("Mongolia"),("Turkmenistan"),("Mali"),("Czech Republic"),("Costa Rica"),("Cook Islands"),("Monaco"),("San Marino");
+INSERT INTO `countries` (`name`) VALUES ("Rwanda"),("Pitcairn Islands"),("Jordan"),("Kazakhstan"),("Croatia"),("Uzbekistan"),("Jersey"),("Mayotte"),("South Africa"),("Niue");
+INSERT INTO `countries` (`name`) VALUES ("Macedonia"),("Malta"),("Japan"),("Saint Kitts and Nevis"),("South Sudan"),("Luxembourg"),("Cayman Islands"),("Finland"),("Saudi Arabia"),("Trinidad and Tobago");
+INSERT INTO `countries` (`name`) VALUES ("Libya"),("Wallis and Futuna"),("Cyprus"),("Liberia"),("Nicaragua"),("Andorra"),("Djibouti"),("Ghana"),("Falkland Islands"),("Korea, South");
+INSERT INTO `countries` (`name`) VALUES ("Poland"),("Ireland"),("Italy"),("French Southern Territories"),("New Zealand"),("Lesotho"),("Spain"),("Cayman Islands"),("Sri Lanka"),("Bermuda");
+INSERT INTO `countries` (`name`) VALUES ("Iran"),("Bulgaria"),("Curaçao"),("United States"),("Guinea"),("France"),("Cameroon"),("Saint Martin"),("Syria"),("Falkland Islands");
+INSERT INTO `countries` (`name`) VALUES ("Saint Pierre and Miquelon"),("Bulgaria"),("French Southern Territories"),("United States"),("Egypt"),("Hong Kong"),("Reunion"),("Falkland Islands"),("Marshall Islands"),("Reunion");
+
+
 INSERT INTO `Regions` (`name`,`idCountry`) VALUES ("British Columbia",94),("Guanacaste",56),("Konya",74),("Overijssel",8),("BE",43),("AN",52),("Istanbul",20),("Drenthe",10),("Newfoundland and Labrador",14),("Västra Götalands län",37);
 INSERT INTO `Regions` (`name`,`idCountry`) VALUES ("Sardegna",6),("KP",68),("Zeeland",21),("NB",21),("O",10),("Wie",73),("Rajasthan",14),("Pernambuco",14),("North Island",12),("AB",66);
 INSERT INTO `Regions` (`name`,`idCountry`) VALUES ("TX",28),("Pays de la Loire",82),("AB",65),("Madrid",56),("Gävleborgs län",43),("North Island",11),("British Columbia",1),("Ant",3),("Connacht",15),("Wie",85);
