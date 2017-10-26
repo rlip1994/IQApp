@@ -1,0 +1,4 @@
+iduser,username,email,password,iduserType,enable,name,lastname1,lastname2
+1,User_Name_1,User@gmail.com,1234,2,1,Name_User_1,Lastname_user_1,Lastname_User1
+2,User_Name_2,User@gmail2.com,1234,2,1,Name_User_2,Lastname_user_2,Lastname_User2
+3,User_Name_3,User@gmail3.com,1234,2,1,Name_User_3,Lastname_user_3,Lastname_User3
