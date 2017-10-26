@@ -9,10 +9,10 @@
         <input type="text" class="form-control" id="lastname_kid" ng-model="vm.getkid.lastname1" ng-disabled="vm.edit">
     </div>
     <div class="form-group">
-        <label for="lastname2_kid">Primer Apellido</label>
+        <label for="lastname2_kid">Segundo Apellido</label>
         <input type="text" class="form-control" id="lastname2_kid" ng-model="vm.getkid.lastname2" ng-disabled="vm.edit">
     </div>
-    
+
     <div class="form-group">
         <label for="select_age_kid">Edad</label>
         <input type="number" class="form-control" id="select_age_kid" ng-model="vm.getkid.age" ng-disabled="vm.edit">
@@ -28,17 +28,17 @@
 
     <div class="form-group" ng-hide="vm.edit">
         <label for="selSchool">Escuela</label>
-        <select  class="form-control" ng-model="vm.selectedSchool" ng-options="x.name for x in vm.getSchool">
+        <select class="form-control" ng-model="vm.selectedSchool" ng-options="x.name for x in vm.getSchool">
         </select>
-        
-      </div>
+
+    </div>
     <div class="form-group" ng-hide="vm.edit">
         <label for="selGrade">Grado</label>
-        <select  class="form-control" ng-model="vm.selectedGrade" ng-options="x.name for x in vm.getGrades">
+        <select class="form-control" ng-model="vm.selectedGrade" ng-options="x.name for x in vm.getGrades">
         </select>
-        
-      </div>
-    
+
+    </div>
+
     <div class="form-group" ng-show="vm.edit">
         <label for="country">Pais</label>
         <input type="text" class="form-control" id="country" ng-model="vm.getkid.country" ng-disabled="vm.edit">
@@ -53,22 +53,22 @@
     </div>
     <div class="form-group" ng-hide="vm.edit">
         <label for="selCountry">Pais:</label>
-        <select  ng-click="vm.loadRegions()" class="form-control" ng-model="vm.selectedCountry" ng-options="x.name for x in vm.getCountry">
+        <select ng-click="vm.loadRegions()" class="form-control" ng-model="vm.selectedCountry" ng-options="x.name for x in vm.getCountry">
         </select>
-        
-      </div>
-    <div class="form-group"  ng-hide="vm.edit">
+
+    </div>
+    <div class="form-group" ng-hide="vm.edit">
         <label for="selRegions">Región:</label>
-        <select  ng-click="vm.loadCities()" class="form-control" ng-model="vm.selectedRegion" ng-options="x.name for x in vm.getRegions">
+        <select ng-click="vm.loadCities()" class="form-control" ng-model="vm.selectedRegion" ng-options="x.name for x in vm.getRegions">
         </select>
-        
-      </div>
-    <div class="form-group" ng-hide="vm.edit" >
+
+    </div>
+    <div class="form-group" ng-hide="vm.edit">
         <label for="selCities">Ciudad:</label>
-        <select  class="form-control" ng-model="vm.selectedCity" ng-options="x.name for x in vm.getCities">
+        <select class="form-control" ng-model="vm.selectedCity" ng-options="x.name for x in vm.getCities">
         </select>
-        
-      </div>
+
+    </div>
     <div class="form-group">
         <label for="zipcode">Código Postal</label>
         <input type="text" class="form-control" id="zipcode" ng-model="vm.getkid.zipCode" ng-disabled="vm.edit">
@@ -104,7 +104,7 @@
             <a ng-click="vm.updateKidsForm()" type="button" class="btn btn-default btn_update" ng-show="vm.edit">Modificar Datos</a>
             <a ng-click="vm.cancelUpdate()" type="button" class="btn btn-default btn_cancel" ng-show="vm.btnAcceptCancel">Cancelar</a>
             <a ng-click="vm.acceptUpdate()" type="submit" class="btn btn-default btn_accept" ng-show="vm.btnAcceptCancel">Aceptar</a>
-            
+
         </div>
     </div>
 </form>

@@ -8,48 +8,51 @@
  * Controller of the iqwebApp
  */
 angular.module('iqwebApp')
-  .controller('kidsProfileCtrl', function ($scope,$http,$routeParams) {
+  .controller('kidsProfileCtrl', function ($scope,$http,$routeParams,$mdDialog,$window) {
   
+   var vm = this;
+   
+   vm.updateKidsForm = updateKidsForm;
+   vm.cancelUpdate = cancelUpdate;
+   vm.acceptUpdate = acceptUpdate;
+   vm.loadRegions = loadRegions;
+   vm.loadCities = loadCities;
+   vm.start=start;
+   vm.getkid;
+   vm.getCountry;
+   vm.getRegions;
+   vm.getCity;
+   vm.getGrades;
+   vm.getSchool;
 
-   this.updateKidsForm = updateKidsForm;
-   this.cancelUpdate = cancelUpdate;
-   this.acceptUpdate = acceptUpdate;
-   this.loadRegions = loadRegions;
-   this.loadCities = loadCities;
-   this.start=start;
-   this.getkid;
-   this.getCountry;
-   this.getRegions;
-   this.getCity;
-   this.getGrades;
-   this.getSchool;
-
-    this.edit=true;
-    this.btnAcceptCancel=false;
+   vm.edit=true;
+   vm.btnAcceptCancel=false;
 
   
     function start(){
       
       $http.get('http://localhost:3000/getKid/'+$routeParams.idkid).then(function(response){
-      $scope.vm.getkid=response.data[0][0];
+      vm.getkid=response.data[0][0];
       });
       
 
     }
     
     function updateKidsForm(){
-      this.edit= false;
-      this.btnAcceptCancel = !this.edit;
+      vm.edit= false;
+      vm.btnAcceptCancel = !vm.edit;
      
       
       $http.get('http://localhost:3000/getCountry/').then(function(response){
          
         $scope.vm.getCountry=response.data[0];
+        
         });
 
       $http.get('http://localhost:3000/getGrades/').then(function(response){
           
          $scope.vm.getGrades=response.data[0];
+
          });
 
       $http.get('http://localhost:3000/getSchool/').then(function(response){
@@ -61,20 +64,21 @@ angular.module('iqwebApp')
 
     function loadRegions(){
 
-      if(this.selectedCountry){
+      if(vm.selectedCountry){
  
-        $http.get('http://localhost:3000/getRegions/'+this.selectedCountry.idCountry).then(function(response){
+        $http.get('http://localhost:3000/getRegions/'+vm.selectedCountry.idCountry).then(function(response){
      
            $scope.vm.getRegions=response.data[0];
+           
         });
       }
      
     }
 
     function loadCities(){
-      if(this.selectedRegion){
+      if(vm.selectedRegion){
 
-        $http.get('http://localhost:3000/getCities/'+this.selectedRegion.idRegion).then(function(response){
+        $http.get('http://localhost:3000/getCities/'+vm.selectedRegion.idRegion).then(function(response){
       
            $scope.vm.getCities=response.data[0];
         });
@@ -82,26 +86,41 @@ angular.module('iqwebApp')
      
     }
     
+    function succesDialog() {
+      
+      $mdDialog.show(
+        $mdDialog.alert()
+          .clickOutsideToClose(true)
+          .title('Niño modificado')
+          .textContent('Se ha modificado un(a) niño(a) de manera exitosa')
+          .ariaLabel('Alert Dialog Demo')
+          .ok('Aceptar')
+      );
+    };
+
     function acceptUpdate(){
       
-      this.getkid.country=this.selectedCountry.name;
-      this.getkid.region=this.selectedRegion.name;
-      this.getkid.city=this.selectedCity.idCity;
-      this.getkid.grade=this.selectedGrade.idGrade;
-      this.getkid.school=this.selectedSchool.idSchool;
-      console.dir(this.getkid);
-      console.dir(this.selectedCity);
-      console.dir(this.selectedGrade);
+      vm.getkid.country=vm.selectedCountry.name;
+      vm.getkid.region=vm.selectedRegion.name;
+      vm.getkid.city=vm.selectedCity.idCity;
+      vm.getkid.grade=vm.selectedGrade.idGrade;
+      vm.getkid.school=vm.selectedSchool.idSchool;
+      
 
-      $http.post('http://localhost:3000/modKid',this.getkid).then(function(response){
+      $http.post('http://localhost:3000/modKid',vm.getkid).then(function(response){
         console.log(response.data);
       });
+
+      // validacion del contenido de getkid  que no sea NULL  
+      succesDialog();
+      var landingUrl = "http://" + $window.location.host + "/#!/kids";
+      $window.location.href = landingUrl;
      
     }
 
     function cancelUpdate(){
-      this.edit = true;
-      this.btnAcceptCancel = !this.edit;
+      vm.edit = true;
+      vm.btnAcceptCancel = !this.edit;
     }
 
    
