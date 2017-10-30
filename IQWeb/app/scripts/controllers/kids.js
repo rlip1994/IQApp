@@ -20,7 +20,7 @@ angular.module('iqwebApp')
 
     
     function start(){
-      $http.get('http://localhost:3000/getAllKids/63').then(function(response){
+      $http.get('http://andresolis-littlestark.c9users.io:8080/getAllKids/63').then(function(response){
         
         $scope.vm.kids=response.data[0];
       });

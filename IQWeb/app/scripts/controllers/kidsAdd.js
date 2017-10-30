@@ -27,17 +27,17 @@ angular.module('iqwebApp')
     vm.addKidResponse;
 
     function start() {
-      $http.get('http://localhost:3000/getCountry/').then(function (response) {
+      $http.get('http://andresolis-littlestark.c9users.io:8080/getCountry/').then(function (response) {
 
         $scope.vm.getCountry = response.data[0];
       });
 
-      $http.get('http://localhost:3000/getGrades/').then(function (response) {
+      $http.get('http://andresolis-littlestark.c9users.io:8080/getGrades/').then(function (response) {
 
         $scope.vm.getGrades = response.data[0];
       });
 
-      $http.get('http://localhost:3000/getSchool/').then(function (response) {
+      $http.get('http://andresolis-littlestark.c9users.io:8080/getSchool/').then(function (response) {
 
         $scope.vm.getSchool = response.data[0];
       });
@@ -47,7 +47,7 @@ angular.module('iqwebApp')
 
       if (vm.selectedCountry) {
 
-        $http.get('http://localhost:3000/getRegions/' + vm.selectedCountry.idCountry).then(function (response) {
+        $http.get('http://andresolis-littlestark.c9users.io:8080/getRegions/' + vm.selectedCountry.idCountry).then(function (response) {
 
           $scope.vm.getRegions = response.data[0];
         });
@@ -74,7 +74,7 @@ angular.module('iqwebApp')
     function loadCities() {
       if (vm.selectedRegion) {
 
-        $http.get('http://localhost:3000/getCities/' + vm.selectedRegion.idRegion).then(function (response) {
+        $http.get('http://andresolis-littlestark.c9users.io:8080/getCities/' + vm.selectedRegion.idRegion).then(function (response) {
 
           $scope.vm.getCities = response.data[0];
         });
@@ -93,7 +93,7 @@ angular.module('iqwebApp')
         vm.getkid.idUser = 63;
 
 
-        $http.post('http://localhost:3000/addKid', vm.getkid).then(function (response) {
+        $http.post('http://andresolis-littlestark.c9users.io:8080/addKid', vm.getkid).then(function (response) {
           $scope.vm.addKidResponse = response;
         });
         // validacion del contenido de getkid  que no sea NULL  
