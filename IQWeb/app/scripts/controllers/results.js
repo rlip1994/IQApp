@@ -16,7 +16,7 @@ angular.module('iqwebApp').controller('resultsCtrl', function ($scope,$http,$fil
     
 
     //DropDown SCHOOLS
-    $http.get('http://localhost:3000/getSchool/names')
+    $http.get('http://andresolis-littlestark.c9users.io:8080/getSchool/names')
     .then(function(response){
         $scope.schools=response.data[0];
         $scope.schools.push({name:"Ninguno"});
@@ -31,7 +31,7 @@ angular.module('iqwebApp').controller('resultsCtrl', function ($scope,$http,$fil
     $scope.ageSelected = "Ninguno";
     $scope.ageFilter = "";
     //DropDown CATERGORIES
-    $http.get('http://localhost:3000/categories').then(function(response){
+    $http.get('http://andresolis-littlestark.c9users.io:8080/categories').then(function(response){
         $scope.categories=response.data[0];
         $scope.categories.push({name: "Ninguno"});
         $scope.categorySelected = "Ninguno";   
@@ -43,7 +43,7 @@ angular.module('iqwebApp').controller('resultsCtrl', function ($scope,$http,$fil
     
     
   $scope.getKidGames = function(idKid){
-    return $http.get('http://localhost:3000/results/kidGames/'+idKid)
+    return $http.get('http://andresolis-littlestark.c9users.io:8080/results/kidGames/'+idKid)
     .then(function(response)
     {
       return response.data[0];
@@ -55,12 +55,12 @@ angular.module('iqwebApp').controller('resultsCtrl', function ($scope,$http,$fil
           
 
   };
-  $http.get('http://localhost:3000/results/')
+  $http.get('http://andresolis-littlestark.c9users.io:8080/results/')
     .then(function(kids)
     {
         kids.data[0].forEach(function(kid)
         {
-          $http.get('http://localhost:3000/results/kidGames/'+kid.idPlayer)
+          $http.get('http://andresolis-littlestark.c9users.io:8080/results/kidGames/'+kid.idPlayer)
           .then(function(games)
           {
             console.log(games);

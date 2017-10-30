@@ -30,7 +30,7 @@ angular.module('iqwebApp')
 
 
     function start() {
-      $http.get('http://localhost:3000/userProfile/63').then(function (response) {
+      $http.get('http://andresolis-littlestark.c9users.io:8080/userProfile/63').then(function (response) {
 
         $scope.vm.user = response.data[0][0];
       });
@@ -41,7 +41,7 @@ angular.module('iqwebApp')
       vm.changePass = true;
       vm.btnAcceptCancel = !vm.edit;
 
-      $http.get('http://localhost:3000/userProfile/63').then(function (response) {
+      $http.get('http://andresolis-littlestark.c9users.io:8080/userProfile/63').then(function (response) {
 
         $scope.vm.user = response.data[0][0];
       });
@@ -76,7 +76,7 @@ angular.module('iqwebApp')
     }
 
     function validUser() {
-      return $http.get('http://localhost:3000/getValidUser/' + 63 + '/' + vm.user.password).then(function (response) {
+      return $http.get('http://andresolis-littlestark.c9users.io:8080/getValidUser/' + 63 + '/' + vm.user.password).then(function (response) {
         if (response.data[0][0]) {
           return response.data[0][0];
         }
@@ -93,7 +93,7 @@ angular.module('iqwebApp')
         }
         return prom.then(function (result) {
           if (result) {
-            return $http.post('http://localhost:3000/userProfileMod', vm.user).then(function (response) {
+            return $http.post('http://andresolis-littlestark.c9users.io:8080/userProfileMod', vm.user).then(function (response) {
 
               return response;
 
@@ -102,7 +102,7 @@ angular.module('iqwebApp')
         });
 
       } else {
-        return $http.post('http://localhost:3000/userProfileMod', vm.user).then(function (response) {
+        return $http.post('http://andresolis-littlestark.c9users.io:8080/userProfileMod', vm.user).then(function (response) {
 
           return response;
 

@@ -31,7 +31,7 @@ angular.module('iqwebApp')
   
     function start(){
       
-      $http.get('http://localhost:3000/getKid/'+$routeParams.idkid).then(function(response){
+      $http.get('http://andresolis-littlestark.c9users.io:8080/getKid/'+$routeParams.idkid).then(function(response){
       vm.getkid=response.data[0][0];
       });
       
@@ -43,19 +43,19 @@ angular.module('iqwebApp')
       vm.btnAcceptCancel = !vm.edit;
      
       
-      $http.get('http://localhost:3000/getCountry/').then(function(response){
+      $http.get('http://andresolis-littlestark.c9users.io:8080/getCountry/').then(function(response){
          
         $scope.vm.getCountry=response.data[0];
         
         });
 
-      $http.get('http://localhost:3000/getGrades/').then(function(response){
+      $http.get('http://andresolis-littlestark.c9users.io:8080/getGrades/').then(function(response){
           
          $scope.vm.getGrades=response.data[0];
 
          });
 
-      $http.get('http://localhost:3000/getSchool/').then(function(response){
+      $http.get('http://andresolis-littlestark.c9users.io:8080/getSchool/').then(function(response){
         
          $scope.vm.getSchool=response.data[0];
          });
@@ -66,7 +66,7 @@ angular.module('iqwebApp')
 
       if(vm.selectedCountry){
  
-        $http.get('http://localhost:3000/getRegions/'+vm.selectedCountry.idCountry).then(function(response){
+        $http.get('http://andresolis-littlestark.c9users.io:8080/getRegions/'+vm.selectedCountry.idCountry).then(function(response){
      
            $scope.vm.getRegions=response.data[0];
            
@@ -78,7 +78,7 @@ angular.module('iqwebApp')
     function loadCities(){
       if(vm.selectedRegion){
 
-        $http.get('http://localhost:3000/getCities/'+vm.selectedRegion.idRegion).then(function(response){
+        $http.get('http://andresolis-littlestark.c9users.io:8080/getCities/'+vm.selectedRegion.idRegion).then(function(response){
       
            $scope.vm.getCities=response.data[0];
         });
