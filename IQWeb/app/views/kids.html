@@ -3,11 +3,11 @@
     <div class="container-fluid">
       <form class="navbar-form navbar-left">
         <div class="form-group">
-        <input type="text" class="form-control" placeholder="Buscar" id="search_input">
-        <select  ng-click="vm.loadRegions()" class="form-control" ng-model="vm.selectedCountry" ng-options="x.name for x in vm.getCountry"><option value='' disabled selected>Tipo De Busqueda</option>
+        <input type="text" class="form-control" ng-model="vm.searchItem" placeholder="Buscar" id="search_input">
+        <select  class="form-control" ng-model="vm.selectedSearchType" ng-options="x for x in vm.searchType"><option value='' disabled selected>Tipo De Busqueda</option>
         </select>
-          <a type="submit" class="btn btn-default" id="btn_search">Buscar</a>
-          <a ng-click="addKids()" type="submit" class="btn btn-default" id="btn_add" ng-href="#!/kidsAdd">Agregar niño</a>
+          <a ng-click="vm.search()" type="submit" class="btn btn-default" id="btn_search">Buscar</a>
+          <a ng-click="vm.addKids()" type="submit" class="btn btn-default" id="btn_add" ng-href="#!/kidsAdd">Agregar niño</a>
         </div>
       </form>
     </div>

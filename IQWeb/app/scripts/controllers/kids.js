@@ -14,8 +14,9 @@ angular.module('iqwebApp')
     var vm = this;
     
     vm.start=start;
+    vm.search=search;
     vm.kids;
-    
+    vm.searchType=["Escuela","Grado","Identificacion","Region"];
 
 
     
@@ -24,13 +25,12 @@ angular.module('iqwebApp')
         
         $scope.vm.kids=response.data[0];
       });
-
     }
     
-    function cancelUpdate(){
-      
+ function search(){
+      console.dir(vm.selectedSearchType);
+      console.dir(vm.searchItem);
     }
-
 
 
   });
