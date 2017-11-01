@@ -8,20 +8,23 @@
  * Controller of the iqwebApp
  */
 angular.module('iqwebApp')
-    .controller('RegisterCtrl', function($window, $scope, $http, $mdDialog) {
+    .controller('LoginCtrl', function($window, $location, $scope, $http, $mdDialog, $rootScope, $cookieStore) {
 
         var vm = this;
 
 
-        
+
         vm.acceptLogin = acceptLogin;
-     
+        vm.register = register;
+
 
         vm.user;
 
 
 
-
+        function register() {
+            $location.path("/register")
+        }
 
 
         function succesDialog() {
@@ -42,20 +45,16 @@ angular.module('iqwebApp')
 
 
         function acceptLogin() {
-            if ((typeof(vm.user.username) !== "undefined") && (typeof(vm.user.password) !== "undefined") ) {
-                if (vm.password2 === vm.user.password) {
-                    vm.user.userType = vm.selectedUserType.value;
-                    $http.post('http://andresolis-littlestark.c9users.io:8080/userRegister', vm.user).then(function(response) {
-
-                    })
-
+            if (!angular.isUndefined(vm.user)) {
+                if (!angular.isUndefined(vm.user.username) && !angular.isUndefined(vm.user.password)) {
+                    if (vm.user.username !== '' && vm.user.password !== '') {
+                        $http.get('http://andresolis-littlestark.c9users.io:8080/userLogin/' + vm.user.username + '/' + vm.user.password).then(function(response) {
+                            $cookieStore.put('idUser', response.data[0][0].iduser);
+                        })
+                    }
                 }
             }
         }
-
-
-
-
 
 
 

@@ -8,7 +8,7 @@
  * Controller of the iqwebApp
  */
 angular.module('iqwebApp')
-  .controller('KidsCtrl', function($scope, $http) {
+  .controller('KidsCtrl', function($scope, $http,$cookieStore) {
 
 
     var vm = this;
@@ -23,7 +23,7 @@ angular.module('iqwebApp')
 
 
     function start() {
-      $http.get('http://andresolis-littlestark.c9users.io:8080/getAllKids/7').then(function(response) {
+      $http.get('http://andresolis-littlestark.c9users.io:8080/getAllKids/'+$cookieStore.get('idUser')).then(function(response) {
 
         $scope.vm.kids = response.data[0];
       });
@@ -40,8 +40,6 @@ angular.module('iqwebApp')
           for (var key in player) {
             if (selectedKey === key) {
               var allKidsLower = player[key].toLowerCase();
-              var searchLower = vm.searchItem.toLowerCase();
-              console.dir(allKidsLower.indexOf(searchLower));
               if (allKidsLower.indexOf(vm.searchItem.toLowerCase()) + 1) {
                 vm.kids.push(player);
               }

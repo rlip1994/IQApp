@@ -63,7 +63,7 @@ angular.module('iqwebApp').controller('resultsCtrl', function ($scope,$http,$fil
           $http.get('http://andresolis-littlestark.c9users.io:8080/results/kidGames/'+kid.idPlayer)
           .then(function(games)
           {
-            console.log(games);
+            
             kid.games=games.data[0];
             kid.category = "";
             var grade  = 0;
@@ -147,7 +147,7 @@ angular.module('iqwebApp').controller('resultsCtrl', function ($scope,$http,$fil
           if(game ===undefined){
             kid.category = "";
           }else{
-            console.log(game.grade);
+          
             kid.grade = game.grade;
             kid.category = game.category
           }

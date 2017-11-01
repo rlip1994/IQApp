@@ -8,7 +8,7 @@
  * Controller of the iqwebApp
  */
 angular.module('iqwebApp')
-    .controller('RegisterCtrl', function($window, $scope, $http, $mdDialog) {
+    .controller('RegisterCtrl', function($window, $scope, $http, $mdDialog, $location) {
 
         var vm = this;
 
@@ -45,7 +45,7 @@ angular.module('iqwebApp')
         };
 
         function cancelRegister() {
-            console.dir(vm.user.userType);
+            $location.path("/login");
         }
 
 
