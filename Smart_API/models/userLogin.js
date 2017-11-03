@@ -3,9 +3,9 @@ var db = require('../dbconnection');
 
 var userLogin = {
 
-  sp_userloginUser: function (users, callback) {
+  sp_userlogin: function (username, password, callback) {
 
-    return db.query("call sp_userloginUser(?,?)", [users.username,users.password], callback);
+    return db.query("call sp_loginUser(?,?)", [username,password], callback);
 
   }
 };
