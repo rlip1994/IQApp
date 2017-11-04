@@ -27,7 +27,7 @@ var getGrades = require('./routes/getGrades');
 var results = require('./routes/results');
 var getValidUser = require('./routes/getValidUser');
 var getUsersTypes = require('./routes/getUsersTypes');
-var getType = require('./routes/getUsertype_x_user');
+var getType = require('./routes/getType');
 var app = express();
 
 

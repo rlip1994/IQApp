@@ -5,7 +5,7 @@ router.get('/',function(req,res,next){
 
         usertypes.sp_getuserTypes(function(err,rows){
 
-            //console.log(req.body);
+            
             if(err)
             {
                 res.json(err);

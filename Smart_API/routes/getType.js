@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var user=require('../models/getUsertype_x_user');
+var user=require('../models/getType');
 
 /* GET users listing. */
 router.get('/:idUser?', function(req, res, next) {
