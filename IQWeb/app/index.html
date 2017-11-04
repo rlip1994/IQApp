@@ -16,6 +16,9 @@
   <!-- build:css(.tmp) styles/main.css -->
   <link rel="stylesheet" href="styles/main.css">
   <!-- endbuild -->
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Annie+Use+Your+Telescope|Luckiest+Guy');
+  </style>
 </head>
 
 <body ng-app="iqwebApp">
@@ -28,21 +31,11 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-12">
-          <img src="/images/banner.png">
+          <img class="img-responsive" id="bannerPic" src="/images/banner.png">
         </div>
       </div>
-      <div class="col-sm-3">
-        <div class="row rw_btn">
-          <div class="btn-group-vertical" id="menu_btn">
-            <a href="#" type="submit" class="btn btn-menu">Menú</a>
-            <a ng-href="#!/profile" type="submit" class="btn btn-profile" id="btn-profile">Perfil</a>
-            <a ng-href="#!/kids" type="submit" class="btn btn-kids">Niños Encuestados</a>
-            <a ng-href="#!/results" type="submit" class="btn btn-kids">Resultados</a>
-            <a href="" type="submit" class="btn btn-exit">Salida</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6">
+      <menu></menu>
+      <div class="col-sm-6 ">
         <div class="container">
           <div ng-view=""></div>
         </div>
@@ -59,7 +52,7 @@
         <p><span class="glyphicon glyphicon-heart"></span>SMART</p>
       </div>
       <div class="col-sm-6">
-         <a ng-href="#!/help" style="float: right;">Ayuda</a>
+         <a ng-href="#!/help" style="float: right;" id="help_label">Ayuda</a>
       </div>
      
     </div>
@@ -112,7 +105,8 @@
   <script src="scripts/controllers/results.js"></script>
   <script src="scripts/controllers/login.js"></script>
   <script src="scripts/controllers/register.js"></script>
-  
+  <script src="scripts/controllers/menu.js"></script>
+  <script src="scripts/controllers/menu.directive.js"></script>
   
 
   <!-- endbuild -->

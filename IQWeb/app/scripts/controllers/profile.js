@@ -56,12 +56,12 @@ angular.module('iqwebApp')
         .title('Perfil Modificado')
         .textContent('Se ha modificado el perfil de manera exitosa')
         .ariaLabel('Alert Dialog Demo')
-        .ok('Aceptar')
+        .ok('Aceptar');
 
       $mdDialog.show(alert).then(function () {
         $window.location.reload();
       });
-    };
+    }
 
     function cancelUpdate() {
       vm.edit = true;
@@ -97,7 +97,7 @@ angular.module('iqwebApp')
 
               return response;
 
-            })
+            });
           }
         });
 
@@ -106,7 +106,7 @@ angular.module('iqwebApp')
 
           return response;
 
-        })
+        });
       }
 
 

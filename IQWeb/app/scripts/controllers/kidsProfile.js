@@ -24,11 +24,11 @@ angular.module('iqwebApp')
    vm.getCity;
    vm.getGrades;
    vm.getSchool;
-
+ 
    vm.edit=true;
    vm.btnAcceptCancel=false;
 
-  
+   start();
     function start(){
       
       $http.get('http://andresolis-littlestark.c9users.io:8080/getKid/'+$routeParams.idkid).then(function(response){
@@ -47,6 +47,7 @@ angular.module('iqwebApp')
          
         $scope.vm.getCountry=response.data[0];
         
+        
         });
 
       $http.get('http://andresolis-littlestark.c9users.io:8080/getGrades/').then(function(response){
@@ -59,6 +60,7 @@ angular.module('iqwebApp')
         
          $scope.vm.getSchool=response.data[0];
          });
+         
 
     }
 
@@ -96,31 +98,33 @@ angular.module('iqwebApp')
           .ariaLabel('Alert Dialog Demo')
           .ok('Aceptar')
       );
-    };
+    }
 
     function acceptUpdate(){
       
-      vm.getkid.country=vm.selectedCountry.name;
-      vm.getkid.region=vm.selectedRegion.name;
-      vm.getkid.city=vm.selectedCity.idCity;
-      vm.getkid.grade=vm.selectedGrade.idGrade;
-      vm.getkid.school=vm.selectedSchool.idSchool;
+       vm.getkid.country=vm.selectedCountry.name;
+       vm.getkid.region=vm.selectedRegion.name;
+       vm.getkid.city=vm.selectedCity.idCity;
+       vm.getkid.grade=vm.selectedGrade.idGrade;
+       vm.getkid.school=vm.selectedSchool.idSchool;
+      //vm.getkid.school=vm.selectedSchool.idSchool ? vm.selectedSchool.idSchool : getSchoolId(vm.selectedSchool) ;
       
 
-      $http.post('http://localhost:3000/modKid',vm.getkid).then(function(response){
-        console.log(response.data);
-      });
+      $http.post('http://andresolis-littlestark.c9users.io:8080/modKid',vm.getkid).then(function (response) {
+          // body...
+          // validacion del contenido de getkid  que no sea NULL  
+          succesDialog();
+          var landingUrl = "http://" + $window.location.host + "/#!/kids";
+          $window.location.href = landingUrl;
+      })
 
-      // validacion del contenido de getkid  que no sea NULL  
-      succesDialog();
-      var landingUrl = "http://" + $window.location.host + "/#!/kids";
-      $window.location.href = landingUrl;
+      
      
     }
 
     function cancelUpdate(){
       vm.edit = true;
-      vm.btnAcceptCancel = !this.edit;
+      vm.btnAcceptCancel = !vm.edit;
     }
 
    

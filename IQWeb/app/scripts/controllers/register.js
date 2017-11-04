@@ -12,37 +12,13 @@ angular.module('iqwebApp')
 
         var vm = this;
 
-
+        vm.ErrorDialog = ErrorDialog;
         vm.cancelRegister = cancelRegister;
         vm.acceptRegister = acceptRegister;
-        vm.userTypes = [{ 'name': 'Administrador', 'value': 1 }, { 'name': 'Encuestador', 'value': 2 }];
-
-
-
-
-
+        vm.loadUserTypes = loadUserTypes;
+        vm.userTypes;
 
         vm.user;
-
-
-
-
-
-
-        function succesDialog() {
-
-
-            var alert = $mdDialog.alert()
-                .clickOutsideToClose(true)
-                .title('Perfil Modificado')
-                .textContent('Se ha modificado el perfil de manera exitosa')
-                .ariaLabel('Alert Dialog Demo')
-                .ok('Aceptar')
-
-            $mdDialog.show(alert).then(function() {
-                $window.location.reload();
-            });
-        };
 
         function cancelRegister() {
             $location.path("/login");
@@ -53,19 +29,43 @@ angular.module('iqwebApp')
         function acceptRegister() {
             if ((typeof(vm.user.username) !== "undefined") && (typeof(vm.user.name) !== "undefined") && (typeof(vm.user.lastname1) !== "undefined") && (typeof(vm.user.email) !== "undefined") && (typeof(vm.user.password) !== "undefined") && (typeof(vm.password2) !== "undefined") && (typeof(vm.selectedUserType) !== "undefined")) {
                 if (vm.password2 === vm.user.password) {
-                    vm.user.userType = vm.selectedUserType.value;
+                    vm.user.userType = vm.selectedUserType.iduserType;
+                    console.dir(vm.user);
                     $http.post('http://andresolis-littlestark.c9users.io:8080/userRegister', vm.user).then(function(response) {
-
-                    })
+                        
+                        console.dir(response);
+                        if(response.data.affectedRows === 1){
+                            $location.path('/login');
+                        }
+                        else{
+                            vm.ErrorDialog();
+                        }
+                    });
 
                 }
             }
         }
 
 
+    function ErrorDialog() {
+      
+      $mdDialog.show(
+        $mdDialog.alert()
+          .clickOutsideToClose(true)
+          .title('Error')
+          .textContent('El nombre de cuenta ya existe')
+          .ariaLabel('Alert Dialog Demo')
+          .ok('Aceptar')
+      );
+    }
 
-
-
+    function loadUserTypes(){
+         $http.get('http://andresolis-littlestark.c9users.io:8080/getUsersTypes/').then(function (response) {
+             console.log(response);
+             vm.userTypes = response.data[0];
+             
+        });
+    }
 
 
 

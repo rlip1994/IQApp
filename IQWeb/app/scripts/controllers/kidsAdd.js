@@ -8,7 +8,7 @@
  * Controller of the iqwebApp
  */
 angular.module('iqwebApp')
-  .controller('kidsAdd', function ($window,$scope, $http, $mdDialog, $cookieStore,$location) {
+  .controller('kidsAdd', function ($window,$scope, $http, $mdDialog, $cookieStore) {
 
     var vm = this;
 
@@ -67,7 +67,7 @@ angular.module('iqwebApp')
           .ariaLabel('Alert Dialog Demo')
           .ok('Aceptar')
       );
-    };
+    }
 
 
 
@@ -95,12 +95,14 @@ angular.module('iqwebApp')
 
         $http.post('http://andresolis-littlestark.c9users.io:8080/addKid', vm.getkid).then(function (response) {
           $scope.vm.addKidResponse = response;
+          
+            // validacion del contenido de getkid  que no sea NULL  
+            succesDialog();
+       
+            var landingUrl = "http://" + $window.location.host + "/#!/kids";
+            $window.location.href = landingUrl;
         });
-        // validacion del contenido de getkid  que no sea NULL  
-        succesDialog();
-        $location.path('/kids');
-        //var landingUrl = "http://" + $window.location.host + "/#!/kids";
-        //$window.location.href = landingUrl;
+        
 
 
       }

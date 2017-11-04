@@ -1,20 +1,27 @@
 <!-- Formulario para Agregar Usuario -->
-<form role="form" id="form_addUser" name= 'form_addUser'>
-    <h2 align="center">Registrar Usuario</h2>
-    <div class="form-group">
-        <label for="username">Nombre de Usuario</label>
-        <input type="text" class="form-control" id="username" name='username' ng-model="vm.user.username" >
-    </div>
-   
-    <div class="form-group">
-        <label for="password">Contraseña</label>
-        <input type="password" class="form-control" id="password" ng-model="vm.user.password">
-    </div>
-   
-    <div class="form-group">
-        <div class="col-sm-offset-1 col-sm-10" align="center">
-            <a ng-click="vm.acceptLogin()" type="submit" class="btn btn-default btn_accept" >Aceptar</a>
-            <a ng-click="vm.register()" type="button" class="btn btn-default btn_cancel">Registrar</a>
-        </div>
-    </div>
-</form>
+<div class="col-sm-3"></div>
+<div class="col-sm-6">
+    <form id="form_login" name= 'form_addUser' ng-submit="vm.acceptLogin()">
+                <h2 align="center">Login</h2>
+                <div class="form-group">
+                    <label for="username">Nombre de Cuenta</label>
+                    <input type="text" class="form-control" id="username" name='username' ng-model="vm.user.username" >
+                    <span style="color:red" ng-show="form_addUser.username.$touched && form_addUser.username.$invalid "> Escribir nombre de cuenta</span>
+        
+                </div>
+               
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" class="form-control" id="password" name='pass' ng-model="vm.user.password">
+                    <span style="color:red" ng-show="form_addUser.pass.$touched && form_addUser.pass.$invalid "> Escribir la contraseña </span>
+                </div>
+               
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-10" align="center">
+                        <input type="submit" name="" value="Aceptar" class="btn btn-default btn_accept"/>
+                        <a ng-click="vm.register()" type="button" class="btn btn-default btn_cancel">Registrar</a>
+                    </div>
+                </div>
+    </form>
+</div> 
+

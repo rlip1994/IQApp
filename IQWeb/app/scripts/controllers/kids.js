@@ -21,11 +21,11 @@ angular.module('iqwebApp')
     vm.searchType = ["Escuela", "Grado", "Identificacion", "Region"];
 
 
-
+start();
     function start() {
       $http.get('http://andresolis-littlestark.c9users.io:8080/getAllKids/'+$cookieStore.get('idUser')).then(function(response) {
-
-        $scope.vm.kids = response.data[0];
+        console.dir(response.data[0]);
+        vm.kids = response.data[0];
       });
     }
 

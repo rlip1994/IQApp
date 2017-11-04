@@ -1,0 +1,11 @@
+<div class="col-sm-3" ng-show='vm.isIn' ng-init='vm.start()'>
+    <div class="row rw_btn" >
+        <div class="btn-group-vertical" id="menu_btn">
+            <a href="#" type="submit" class="btn btn-menu">Menú</a>
+            <a ng-href="#!/profile" type="submit" class="btn btn-profile" id="btn-profile">Perfil</a>
+            <a ng-href="#!/kids" type="submit" class="btn btn-kids">Niños Encuestados</a>
+            <a ng-href="#!/results" type="submit" class="btn btn-results" ng-show="vm.isAdmin">Resultados</a>
+            <a ng-click="vm.logout()" type="submit" class="btn btn-exit">Salida</a>
+        </div>
+    </div>
+</div>

@@ -1,84 +1,85 @@
 <div class="resultsContainer">
-
-	<h2>Estadísticas de  encuestas</h2>
-	<h3> Filtros</h3>
-	<div class="filterContainer">
-		<div class="dropdown">
-		  <h6>Centro Educativo</h6>
-		  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{schoolSelected}}
-		  <span class="caret"></span></button>
-		  <ul class="dropdown-menu">
-		  	<div ng-repeat="school in schools">
-		  		<li><a ng-click="updateSchoolDropDown(school.name)">{{school.name}}</a></li>
-		  	</div>
-		  </ul>
+	<div class="row">
+        <div class="col-sm-9">
+			<h2 align="center">Estadísticas de  encuestas</h2>
+			<div class="filterContainer">
+				<div class="dropdown">
+				  <h6>Centro Educativo</h6>
+				  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{schoolSelected}}
+				  <span class="caret"></span></button>
+				  <ul class="dropdown-menu">
+				  	<div ng-repeat="school in schools">
+				  		<li><a ng-click="updateSchoolDropDown(school.name)">{{school.name}}</a></li>
+				  	</div>
+				  </ul>
+				</div>
+				<div class="dropdown">
+				  <h6>Edad</h6>
+				  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{ageSelected}}
+				  <span class="caret"></span></button>
+				  <ul class="dropdown-menu">
+				  	<div ng-repeat="age in years">
+				  		<li><a ng-click="updateAgeDropDown(age.num)">{{age.num}}</a></li>
+				  	</div>
+				  </ul>
+				</div>
+				<div class="dropdown">
+				  <h6>Tema</h6>
+				  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{categorySelected}}
+				  <span class="caret"></span></button>
+				  <ul class="dropdown-menu">
+				  	<div ng-repeat="category in categories">
+				  		<li><a ng-click="updateCatergoryDropDown(category.name)">{{category.name}}</a></li>
+				  	</div>
+				  </ul>
+				</div>
+			</div>
+			<div>
+				<h2><font color="#006699">Resultados Generales</font></h2>
+				<h6>Promedio en puntaje:</h6>{{average}}
+				<h6>Cantidad de niños:</h6>{{kidCount}}
+			</div>
+			<div >
+				<h2>Encuestas</h2>
+				<div>
+					<input type="text" class="form-control" placeholder="Buscar niño" ng-model="nameKid">
+				</div>
+				<div class="table-responsive">          
+				  	<table class="table">
+					    <thead>
+						      <tr>
+							        <th>Nombre</th>
+							        <th>Edad</th>
+							        <th>Grado</th>
+							        <th>Centro Educativo</th>
+							        <th>Promedio</th>
+						      </tr>
+					    </thead>
+					    <tbody>
+					      	<tr ng-init="updateMainResults()" ng-repeat="result in (filterResult | filter : {name : nameKid})">	
+				      			<td>{{result.name}}</td>
+						        <td>{{result.age}}</td>
+						        <td>{{result.level}}</td>
+						        <td>{{result.school}}</td>
+						        <td>{{result.grade}}</td>
+					      	</tr>
+					    </tbody>
+				  	</table>
+				</div>
+			</div>
+		
+		
+			<!-- <div ng-repeat="result in (filterResult = (results | filter : {age : inputText, level: inputlevel}))">
+		
+				{{result.name}}
+				{{result.age}}
+				{{result.level}}
+				{{result.average}}
+				{{result.school}}
+		
+			</div> -->
+		
 		</div>
-		<div class="dropdown">
-		  <h6>Edad</h6>
-		  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{ageSelected}}
-		  <span class="caret"></span></button>
-		  <ul class="dropdown-menu">
-		  	<div ng-repeat="age in years">
-		  		<li><a ng-click="updateAgeDropDown(age.num)">{{age.num}}</a></li>
-		  	</div>
-		  </ul>
-		</div>
-		<div class="dropdown">
-		  <h6>Tema</h6>
-		  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{categorySelected}}
-		  <span class="caret"></span></button>
-		  <ul class="dropdown-menu">
-		  	<div ng-repeat="category in categories">
-		  		<li><a ng-click="updateCatergoryDropDown(category.name)">{{category.name}}</a></li>
-		  	</div>
-		  </ul>
-		</div>
-	</div>
-	<div>
-		<h2><font color="#006699">Resultados Generales</font></h2>
-		<h6>Promedio en puntaje:</h6>{{average}}
-		<h6>Cantidad de niños:</h6>{{kidCount}}
-	</div>
-	<div >
-		<h2>Encuestas</h2>
-		<div>
-			<input type="text" class="form-control" placeholder="Buscar niño" ng-model="nameKid">
-		</div>
-		<div class="table-responsive">          
-		  	<table class="table">
-			    <thead>
-				      <tr>
-					        <th>Nombre</th>
-					        <th>Edad</th>
-					        <th>Grado</th>
-					        <th>Centro Educativo</th>
-					        <th>Promedio</th>
-				      </tr>
-			    </thead>
-			    <tbody>
-			      	<tr ng-init="updateMainResults()" ng-repeat="result in (filterResult | filter : {name : nameKid})">	
-		      			<td>{{result.name}}</td>
-				        <td>{{result.age}}</td>
-				        <td>{{result.level}}</td>
-				        <td>{{result.school}}</td>
-				        <td>{{result.grade}}</td>
-			      	</tr>
-			    </tbody>
-		  	</table>
-		</div>
-	</div>
-
-
-	<!-- <div ng-repeat="result in (filterResult = (results | filter : {age : inputText, level: inputlevel}))">
-
-		{{result.name}}
-		{{result.age}}
-		{{result.level}}
-		{{result.average}}
-		{{result.school}}
-
-	</div> -->
-
-	<SPAN ng-click="printGames()">HagameClick</SPAN>
+    </div>
 <div>
 <!-- ng-init para ejecutar cuando se carga  -->

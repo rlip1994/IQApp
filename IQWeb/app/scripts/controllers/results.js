@@ -24,7 +24,8 @@ angular.module('iqwebApp').controller('resultsCtrl', function ($scope,$http,$fil
         $scope.schoolFilter ="";
         
     }).catch(function(error){
-      alert('Error en servidor');
+      console.log(error);
+      window.alert('Error en servidor');
     });
     //DropDown AGE 
     $scope.years = [{num:"8"},{num:"9"},{num:"10"},{num:"11"},{num:"12"},{num:"13"},{num:"Ninguno"}];
@@ -37,7 +38,8 @@ angular.module('iqwebApp').controller('resultsCtrl', function ($scope,$http,$fil
         $scope.categorySelected = "Ninguno";   
         $scope.categoryFilter = "";
     }).catch(function(error){
-      alert('Error en servidor');
+      console.log(error);
+      window.alert('Error en servidor');
     });
     //$scope.filterResult = $scope.results;
     
@@ -50,7 +52,7 @@ angular.module('iqwebApp').controller('resultsCtrl', function ($scope,$http,$fil
     })
     .catch(function(error)
     {
-        alert(error.message);
+        window.alert(error.message);
     });
           
 
@@ -89,7 +91,7 @@ angular.module('iqwebApp').controller('resultsCtrl', function ($scope,$http,$fil
    //Main results controllers
   $scope.updateMainResults = function(){
      var averageCounter = 0;
-     var speedCounter = 0;
+     //var speedCounter = 0;
     //Update main average 
      $scope.filterResult.forEach(function(element){
         averageCounter += parseInt(element.grade);
@@ -108,32 +110,32 @@ angular.module('iqwebApp').controller('resultsCtrl', function ($scope,$http,$fil
   $scope.updateSchoolDropDown = function (school) {
     $scope.schoolSelected = school;
       if($scope.schoolSelected ==="Ninguno"){ 
-        $scope.schoolFilter = ""
+        $scope.schoolFilter = "";
       }else{
         $scope.schoolFilter = $scope.schoolSelected;
-      };
+      }
     $scope.filterResults();
   };
    $scope.updateAgeDropDown = function (age) {
       $scope.ageSelected = age;
       if($scope.ageSelected ==="Ninguno"){ 
-        $scope.ageFilter = ""
+        $scope.ageFilter = "";
       }else{
         $scope.ageFilter = $scope.ageSelected;
-      };
+      }
       $scope.filterResults();
   };
   $scope.updateCatergoryDropDown = function (category) {
       $scope.categorySelected = category;
       if($scope.categorySelected === "Ninguno"){ 
-        $scope.categoryFilter = ""
+        $scope.categoryFilter = "";
         $scope.filterResult.forEach(function(kid){
           kid.grade = kid.mainGrade;
           kid.category = "";
 
         });
       }else{
-        $scope.categoryFilter = ""
+        $scope.categoryFilter = "";
         $scope.filterResult.forEach(function(kid){
           kid.grade = kid.mainGrade;
           kid.category = "";
@@ -149,11 +151,11 @@ angular.module('iqwebApp').controller('resultsCtrl', function ($scope,$http,$fil
           }else{
           
             kid.grade = game.grade;
-            kid.category = game.category
+            kid.category = game.category;
           }
           
         });
-      };
+      }
       $scope.filterResults();
       
   };
@@ -171,7 +173,7 @@ angular.module('iqwebApp').controller('resultsCtrl', function ($scope,$http,$fil
 
   $scope.printGames = function() 
   {
-    alert(JSON.stringify($scope.filterResult[0].games));
+    window.alert(JSON.stringify($scope.filterResult[0].games));
   };
 
   

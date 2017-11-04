@@ -89,7 +89,7 @@ angular
       .when('/results', {
         resolve:{
           "check": function($location,$cookieStore){
-            if(angular.isUndefined($cookieStore.get('idUser'))){
+            if(angular.isUndefined($cookieStore.get('idUser')) || !$cookieStore.get('isAdmin') ){
                 $location.path('/login');
             }
           }
