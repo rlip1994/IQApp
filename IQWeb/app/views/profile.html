@@ -1,45 +1,54 @@
 <!-- Formulario para Mostrar perfil de Usuario -->
 <form role="form" id="form_profile" ng-init="vm.start()">
-    <h2 align="center">Perfil de Usuario</h2>
-    <div class="form-group">
-        <label for="username">Nombre de Usuario</label>
-        <input type="text" class="form-control" id="nickname" ng-model="vm.user.username" ng-disabled="vm.edit">
+    <div class="row">
+            <div class="col-sm-8">
+                 <h2 align="center">Perfil de Usuario</h2>
+                <div class="form-group">
+                    <label for="username">Nombre de Usuario</label>
+                    <input type="text" class="form-control" id="nickname" ng-model="vm.user.username" ng-disabled="vm.edit">
+                </div>
+                
+                <div class="form-group">
+                    <label for="username">Nombre</label>
+                    <input type="text" class="form-control" id="username" ng-model="vm.user.name" ng-disabled="vm.edit">
+                </div>
+                
+                <div class="form-group">
+                    <label for="firstlastname">Primer Apellido</label>
+                    <input type="text" class="form-control" id="firstlastname" ng-model="vm.user.lastname1" ng-disabled="vm.edit">
+                </div>
+                <div class="form-group">
+                    <label for="secondlastname">Segundo Apellido *</label>
+                    <input type="text" class="form-control" id="secondlastname" ng-model="vm.user.lastname2" ng-disabled="vm.edit">
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo Electronico</label>
+                    <input type="email" class="form-control" id="email" ng-model="vm.user.email" ng-disabled="vm.edit">
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" class="form-control" id="password" ng-model="vm.user.password" ng-disabled="!vm.passwordNew">
+                    <a for="password" id="label_changePass" class="text-primary" ng-show="vm.changePass" ng-model="changePass" ng-click="vm.changePassword()">Cambiar Contraseña</a>
+                </div>
+                <div class="form-group" ng-show="vm.passwordNew">
+                    <label for="passwordChange">Nueva Contraseña</label>
+                    <input type="password" class="form-control" id="passwordChange" ng-model="vm.passwordChange"  ng-disabled="vm.edit" >
+                </div>
+                <div class="form-group"  ng-show="vm.passwordNew">
+                    <label for="passwordConfirm">Confirmar Nueva Contraseña</label>
+                    <input type="password" class="form-control" id="passwordConfirm" ng-model="vm.passwordConfirm" ng-disabled="vm.edit">
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-10" align="center">
+                        <a ng-click="vm.editProfile()" type="button" class="btn btn-default btn_update" ng-show="vm.edit">Modificar Datos</a>
+                        <a ng-click="vm.cancelUpdate()" type="button" class="btn btn-default btn_cancel" ng-show="vm.btnAcceptCancel">Cancelar</a>
+                        <a ng-click="vm.acceptUpdate()" type="submit" class="btn btn-default btn_accept" ng-show="vm.btnAcceptCancel">Aceptar</a>
+                    </div>
+                </div>
+            </div>
     </div>
+    
 
-    <div class="form-group">
-        <label for="username">Nombre</label>
-        <input type="text" class="form-control" id="username" ng-model="vm.user.name" ng-disabled="vm.edit">
-    </div>
-    <div class="form-group">
-        <label for="firstlastname">Primer Apellido</label>
-        <input type="text" class="form-control" id="firstlastname" ng-model="vm.user.lastname1" ng-disabled="vm.edit">
-    </div>
-    <div class="form-group">
-        <label for="secondlastname">Segundo Apellido *</label>
-        <input type="text" class="form-control" id="secondlastname" ng-model="vm.user.lastname2" ng-disabled="vm.edit">
-    </div>
-    <div class="form-group">
-        <label for="email">Correo Electronico</label>
-        <input type="email" class="form-control" id="email" ng-model="vm.user.email" ng-disabled="vm.edit">
-    </div>
-    <div class="form-group">
-        <label for="password">Contraseña</label>
-        <input type="password" class="form-control" id="password" ng-model="vm.user.password" ng-disabled="!vm.passwordNew">
-        <a for="password" id="label_changePass" class="text-primary" ng-show="vm.changePass" ng-model="changePass" ng-click="vm.changePassword()">Cambiar Contraseña</a>
-    </div>
-    <div class="form-group" ng-show="vm.passwordNew">
-        <label for="passwordChange">Nueva Contraseña</label>
-        <input type="password" class="form-control" id="passwordChange" ng-model="vm.passwordChange"  ng-disabled="vm.edit" >
-    </div>
-    <div class="form-group"  ng-show="vm.passwordNew">
-        <label for="passwordConfirm">Confirmar Nueva Contraseña</label>
-        <input type="password" class="form-control" id="passwordConfirm" ng-model="vm.passwordConfirm" ng-disabled="vm.edit">
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-1 col-sm-10" align="center">
-            <a ng-click="vm.editProfile()" type="button" class="btn btn-default btn_update" ng-show="vm.edit">Modificar Datos</a>
-            <a ng-click="vm.cancelUpdate()" type="button" class="btn btn-default btn_cancel" ng-show="vm.btnAcceptCancel">Cancelar</a>
-            <a ng-click="vm.acceptUpdate()" type="submit" class="btn btn-default btn_accept" ng-show="vm.btnAcceptCancel">Aceptar</a>
-        </div>
-    </div>
+    
+    
 </form>

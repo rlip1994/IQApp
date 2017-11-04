@@ -8,7 +8,7 @@
  * Controller of the iqwebApp
  */
 angular.module('iqwebApp')
-  .controller('ProfileCtrl', function ($window, $scope, $http, $mdDialog) {
+  .controller('ProfileCtrl', function ($window, $scope, $http, $mdDialog,$cookieStore) {
 
     var vm = this;
 
@@ -30,7 +30,7 @@ angular.module('iqwebApp')
 
 
     function start() {
-      $http.get('http://andresolis-littlestark.c9users.io:8080/userProfile/63').then(function (response) {
+      $http.get('http://andresolis-littlestark.c9users.io:8080/userProfile/'+$cookieStore.get('idUser')).then(function (response) {
 
         $scope.vm.user = response.data[0][0];
       });
@@ -41,7 +41,7 @@ angular.module('iqwebApp')
       vm.changePass = true;
       vm.btnAcceptCancel = !vm.edit;
 
-      $http.get('http://andresolis-littlestark.c9users.io:8080/userProfile/63').then(function (response) {
+      $http.get('http://andresolis-littlestark.c9users.io:8080/userProfile/'+$cookieStore.get('idUser')).then(function (response) {
 
         $scope.vm.user = response.data[0][0];
       });
@@ -56,12 +56,12 @@ angular.module('iqwebApp')
         .title('Perfil Modificado')
         .textContent('Se ha modificado el perfil de manera exitosa')
         .ariaLabel('Alert Dialog Demo')
-        .ok('Aceptar')
+        .ok('Aceptar');
 
       $mdDialog.show(alert).then(function () {
         $window.location.reload();
       });
-    };
+    }
 
     function cancelUpdate() {
       vm.edit = true;
@@ -76,7 +76,7 @@ angular.module('iqwebApp')
     }
 
     function validUser() {
-      return $http.get('http://andresolis-littlestark.c9users.io:8080/getValidUser/' + 63 + '/' + vm.user.password).then(function (response) {
+      return $http.get('http://andresolis-littlestark.c9users.io:8080/getValidUser/' + $cookieStore.get('idUser') + '/' + vm.user.password).then(function (response) {
         if (response.data[0][0]) {
           return response.data[0][0];
         }
@@ -97,7 +97,7 @@ angular.module('iqwebApp')
 
               return response;
 
-            })
+            });
           }
         });
 
@@ -106,7 +106,7 @@ angular.module('iqwebApp')
 
           return response;
 
-        })
+        });
       }
 
 

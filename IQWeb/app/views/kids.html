@@ -1,27 +1,35 @@
-<div ng-init="vm.start()">
+<div >
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <form class="navbar-form navbar-left">
         <div class="form-group">
         <input type="text" class="form-control" ng-model="vm.searchItem" placeholder="Buscar" id="search_input">
-        <select  class="form-control" ng-model="vm.selectedSearchType" ng-options="x for x in vm.searchType"><option value='' disabled selected>Tipo De Busqueda</option>
+        <select  class="form-control" ng-model="vm.selectedSearchType" ng-options="x for x in vm.searchType" id="search_input"><option value='' disabled selected>Tipo De Busqueda</option>
         </select>
-          <a ng-click="vm.search()" type="submit" class="btn btn-default" id="btn_search">Buscar</a>
+         <a ng-click="vm.addKids()" type="submit" class="btn btn-default" id="btn_add" ng-href="#!/kidsAdd">Agregar niño</a>
+          <br>
+          
+           <a ng-click="vm.search()" type="submit" class="btn btn-default" id="btn_search">Buscar</a>
           <a ng-click="vm.clearSearch()" type="submit" class="btn btn-default" id="btn_search">Limpiar Busqueda</a>
-          <a ng-click="vm.addKids()" type="submit" class="btn btn-default" id="btn_add" ng-href="#!/kidsAdd">Agregar niño</a>
         </div>
       </form>
     </div>
   </nav>
 
-  <h2 align="center">Lista de niños encuestados</h2>
-  <div class="list-group-kids" ng-repeat="x in vm.kids">
-    <a ng-href="#!/kidsProfile/{{x.idplayer}}" class="list-group-item " id="list_infoKids">
-      <p class="list-group-item-text">Cédula: {{x.idCard}}</p>
-      <p class="list-group-item-text">Nombre: {{x.name}} {{x.lastname1}} {{x.lastname2}}</p>
-      <p class="list-group-item-text">Escuela: {{x.school}}</p>
-      <p class="list-group-item-text">Pais: {{x.country}}</p>
-    </a>
-  </div>
+  
+  <div class="row">
+            <div class="col-sm-10">
+              <h2 align="center">Lista de niños encuestados</h2>
+                 <div class="list-group-kids" ng-repeat="x in vm.kids">
+                  <a ng-href="#!/kidsProfile/{{x.idplayer}}" class="list-group-item " id="list_infoKids">
+                    <p class="list-group-item-text">Cédula: {{x.idCard}}</p>
+                    <p class="list-group-item-text">Nombre: {{x.name}} {{x.lastname1}} {{x.lastname2}}</p>
+                    <p class="list-group-item-text">Escuela: {{x.school}}</p>
+                    <p class="list-group-item-text">Pais: {{x.country}}</p>
+                  </a>
+                </div>
+            </div>
+    </div>
+  
 </div>
 
