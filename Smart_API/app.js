@@ -27,6 +27,7 @@ var getGrades = require('./routes/getGrades');
 var results = require('./routes/results');
 var getValidUser = require('./routes/getValidUser');
 var getUsersTypes = require('./routes/getUsersTypes');
+var getType = require('./routes/getUsertype_x_user');
 var app = express();
 
 
@@ -68,6 +69,7 @@ app.use('/getGrades',getGrades);
 app.use('/results',results);
 app.use('/getValidUser',getValidUser);
 app.use('/getUsersTypes',getUsersTypes);
+app.use('/getType',getType);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
