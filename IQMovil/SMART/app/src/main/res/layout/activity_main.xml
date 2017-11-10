@@ -5,9 +5,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.smartapp.web.smart.childList"
+    tools:context="com.smartapp.web.smart.Activity_Child"
     android:background="@drawable/rainbow">
 
+    <ImageView
+        android:id="@+id/settingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="14dp"
+        app:srcCompat="@drawable/settings_icon" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -16,9 +24,9 @@
         app:srcCompat="@drawable/buho"
         tools:layout_editor_absoluteX="74dp"
         tools:layout_editor_absoluteY="59dp"
-        android:layout_marginTop="47dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/buttonStart"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="46dp" />
 
     <Button
         android:id="@+id/buttonStart"
@@ -33,4 +41,17 @@
         android:textSize="18sp"
         tools:layout_editor_absoluteX="74dp"
         tools:layout_editor_absoluteY="401dp" />
+
+    <TextView
+        android:id="@+id/kidNameLabel"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        android:text="¡Selecciona un jugador!"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
 </RelativeLayout>

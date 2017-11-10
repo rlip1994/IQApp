@@ -1,10 +1,8 @@
-package Model;
+package model;
 
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.support.v4.view.accessibility.AccessibilityManagerCompat;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.smartapp.web.smart.MainActivity;

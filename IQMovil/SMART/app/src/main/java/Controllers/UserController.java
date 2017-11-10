@@ -1,6 +1,6 @@
-package Controllers;
+package controllers;
 
-import android.support.v7.app.AlertDialog;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -8,9 +8,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.smartapp.web.smart.Activity_Child;
 import com.smartapp.web.smart.Activity_Main;
+import com.smartapp.web.smart.Activity_Settings;
 import com.smartapp.web.smart.MainActivity;
-import com.smartapp.web.smart.childList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,11 +19,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import Model.Category;
-import Model.Kid;
-import Model.User;
+import model.Kid;
+import model.User;
 import conexion.AppController;
 import utils.Const;
+import utils.Message;
 
 /**
  * Created by kanat on 19/9/2017.
@@ -30,21 +31,19 @@ import utils.Const;
 
 public class UserController {
 
-    private childList activity;
+    private Activity_Child activity;
     private String tag_json_arry = "jarray_req";
-    private User user;
+    public static User user; // Use static to access in all activity
     private String TAG = "UserController";
 
 
-    public UserController(childList pActivity) {
+    public UserController(Activity_Child pActivity) {
         this.activity = pActivity;
-        this.user = Activity_Main.user;
-        getKidsxUser();
+        this.getKidsxUser();
     }
-
-
     private void getKidsxUser() {
         this.activity.showProgressBar();
+        Message.showAlertMessage(activity,user.toString());
         String idUser =  String.valueOf(user.getIdUser());
         JsonArrayRequest req = new JsonArrayRequest(Const.URL_USERS+idUser,
                 new Response.Listener<JSONArray>() {
@@ -56,7 +55,7 @@ public class UserController {
                             createKidsListView();
                             setListViewActivity();
                         } catch (JSONException e) {
-                            showAlertMessage("Error al convertir string en JSON");
+                            Message.showAlertMessage(activity,"Error al convertir string en JSON");
                         }
                         hideProgressDialog();
                     }
@@ -64,7 +63,7 @@ public class UserController {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
-                showAlertMessage("Error en conexion" + error.toString());
+                Message.showAlertMessage(activity,"Error en conexion" + error.toString());
                 hideProgressDialog();
             }
 
@@ -90,6 +89,7 @@ public class UserController {
 
     private void createKidsListView() {
         ArrayList<Kid> kids = this.user.getKidsUser();
+        this.activity.clearDataView();
         for (Kid kid : kids) {
             String idKid = String.valueOf(kid.getIdKid());
             String idGrade = String.valueOf(kid.getGradeIdKid());
@@ -103,6 +103,7 @@ public class UserController {
      "schoolname": "Escuela 1 "**/
 
     private void getArrayKids(String pString) throws JSONException {
+        this.user.clearKidsArray();
         JSONArray arrayJson = new JSONArray(pString);
         arrayJson = arrayJson.getJSONArray(0);
         //Declare temporal variables
@@ -123,14 +124,18 @@ public class UserController {
             this.user.addKidUser(tempKid);
         }
     }
-    public  void showAlertMessage(String pMessage){
-        AlertDialog alertDialog = new AlertDialog.Builder(this.activity).create();
-        alertDialog.setTitle("Alert");
-        alertDialog.setMessage(pMessage);
-        alertDialog.show();
-    }
 
     public void setCurrentKid(Integer pIdUser) {
         this.user.setCurrentKid(pIdUser);
+    }
+
+
+    public void showMainActivity() {
+        if(Activity_Settings.activity_settingsInstance!=null){
+            Activity_Settings.activity_settingsInstance.finish();
+        }
+        Intent Activity = new Intent(this.activity.getApplicationContext(), Activity_Main.class);
+        this.activity.startActivity(Activity);
+        this.activity.finish();
     }
 }

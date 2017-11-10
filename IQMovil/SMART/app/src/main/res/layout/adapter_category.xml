@@ -2,15 +2,20 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.smartapp.web.smart.childList"
+    tools:context="com.smartapp.web.smart.Activity_Child"
     android:background="@drawable/rainbow">
+
     <ProgressBar
-        android:layout_width="wrap_content"
+        android:id="@+id/progressbar"
+        style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/progressbar" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView__choooseCateg" />
 
     <TextView
         android:id="@+id/textView__choooseCateg"
@@ -33,4 +38,15 @@
         android:layout_alignParentStart="true">
 
     </ListView>
+
+    <ImageView
+        android:id="@+id/celebrateImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/kidSelect_activity_settings"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/celebrate" />
+
 </RelativeLayout>

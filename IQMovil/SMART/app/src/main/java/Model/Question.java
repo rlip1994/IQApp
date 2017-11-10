@@ -1,8 +1,9 @@
-package Model;
+package model;
 
 import android.media.Image;
 
 import java.sql.Time;
+import java.util.Arrays;
 
 /**
  * Created by kanat on 15/9/2017.
@@ -17,6 +18,8 @@ public class Question {
     private int pointQuestion;
     private Time speedQuestion;
     private Response responseQuestion;
+
+
     private String[] alternativeResponse;
 
     /**
@@ -71,11 +74,30 @@ public class Question {
         return responseQuestion;
     }
 
-    public void setAlternativeResponse(String[] alternativeResponse) {
-        this.alternativeResponse = alternativeResponse;
+    public void setAlternativeResponse(String[] pAlternativeResponse) {
+        this.alternativeResponse = pAlternativeResponse;
     }
 
     public String[] getAlternativeResponse() {
         return alternativeResponse;
+    }
+
+    /**
+     * @param  point : 1 correct response
+     *                 2 wrong response **/
+    public void setPointQuestion(int point) {
+        this.pointQuestion = point;
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "idQuestion=" + idQuestion +
+                ", textQuestion='" + textQuestion + '\'' +
+                ", pointQuestion=" + pointQuestion +
+                ", speedQuestion=" + speedQuestion +
+                ", responseQuestion=" + responseQuestion +
+                ", alternativeResponse=" + Arrays.toString(alternativeResponse) +
+                '}';
     }
 }

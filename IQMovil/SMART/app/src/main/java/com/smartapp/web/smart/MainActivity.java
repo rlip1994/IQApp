@@ -1,32 +1,12 @@
 package com.smartapp.web.smart;
 
 import android.app.Activity;
-import android.content.DialogInterface;
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import java.net.UnknownHostException;
-import java.util.ArrayList;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Toast;
-
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-
-import org.json.JSONArray;
-
-import Controllers.CategoryController;
-import conexion.AppController;
-import utils.Const;
+import controllers.CategoryController;
 
 
 public class MainActivity extends AppCompatActivity {

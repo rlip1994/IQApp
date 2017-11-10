@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ public class User {
     /**
      attributes
      * **/
-    private int idUser;
+    public static int idUser;
 
     private String nameUser;
     private ArrayList<Kid> kidsUser;
@@ -20,6 +20,12 @@ public class User {
         this.idUser = pIdUser;
         this.nameUser = pNameUser;
         this.kidsUser =  new ArrayList<Kid>();
+    }
+
+    public User(int pIdUser) {
+        this.idUser = pIdUser;
+        this.kidsUser =  new ArrayList<Kid>();
+        this.currentKid = null;
     }
 
     public void addKidUser(Kid pKid){
@@ -55,5 +61,13 @@ public class User {
 
     public Kid getCurrentKid() {
         return this.currentKid;
+    }
+
+    public boolean isSelectedKid() {
+        return !(this.currentKid==null);
+    }
+
+    public void clearKidsArray() {
+        this.kidsUser.clear();
     }
 }

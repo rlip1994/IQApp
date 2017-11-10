@@ -1,13 +1,13 @@
 package com.smartapp.web.smart;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import Model.User;
+import controllers.MainController;
 
 /**
  * Created by klcho.o on 16/9/2017.
@@ -15,29 +15,43 @@ import Model.User;
 
 public class Activity_Main extends AppCompatActivity {
 
+    //public Activity_Main activityInstance;
+
     private Button buttonStart;
-    public static User user;
+    private ImageView setButton;
+    private MainController controller;
+    private TextView kidNameLabel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //activityInstance = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.user = new User("Usuario 2", 2); // TEST USER TODO
+        //Components
+        this.kidNameLabel = (TextView) findViewById(R.id.kidNameLabel);
+        this.controller =  new MainController(this);
+        //BUTTONS
         buttonStart = (Button) findViewById(R.id.buttonStart);
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent activity = new Intent(getApplicationContext(),childList.class);
-                activity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(activity);
+            public void onClick(View view){controller.verifyUserCurrent();
+            }
+        });
+        setButton = (ImageView) findViewById(R.id.settingButton);
+        setButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                controller.showSettingsActivity();
             }
         });
 
-    }
-    public  void showAlertMessage(String pMessage){
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle("Alert");
-        alertDialog.setMessage(pMessage);
-        alertDialog.show();
+    }/**
+     @Method setKidNameText
+     @param pName : set Current kid name
+     **/
+    public void setKidNameText(String pName){
+        this.kidNameLabel.setText(pName);
     }
 }

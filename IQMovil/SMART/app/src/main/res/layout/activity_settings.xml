@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@drawable/rainbow"
+    tools:context="com.smartapp.web.smart.Activity_Settings">
+
+
+    <RelativeLayout
+        android:layout_width="384dp"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <Switch
+            android:id="@+id/sound_Switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView"
+            android:layout_marginTop="42dp"
+            android:text="@string/sounds_activity_settings"
+            android:textSize="24sp"
+            tools:layout_editor_absoluteX="15dp"
+            tools:layout_editor_absoluteY="95dp"
+            tools:text="@string/sounds_activity_settings" />
+
+        <Button
+            android:id="@+id/logOut_button"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="34dp"
+            android:text="@string/logOut_activity_settings"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="490dp" />
+
+        <Button
+            android:id="@+id/selectKid_Button"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/sound_Switch"
+            android:layout_below="@+id/sound_Switch"
+            android:layout_marginEnd="11dp"
+            android:layout_marginTop="31dp"
+            android:text="@string/kidSelect_activity_settings"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="35dp"
+            tools:layout_editor_absoluteY="142dp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/title_activity__settings"
+            android:textSize="40sp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="16dp" />
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -1,8 +1,11 @@
-package Model;
+package model;
 
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Random;
+
+import exceptions.EmptyQuestionArrayException;
+import exceptions.MessageException;
 
 /**
  * Created by kanat on 15/9/2017.
@@ -16,7 +19,11 @@ public class Game {
      private int pointsGame;
      private Time speedGame; // Select correct class of time?
      private ArrayList<Question> questionsGame;
+     private ArrayList<Question> answerQuestions;
+     private Question currentQuestion;
      private int nextQuestion = 0;
+
+
 
     /**Method: Constructor
      * @param pCategory use to get database question
@@ -24,6 +31,7 @@ public class Game {
     public Game(Category pCategory ){
         this.categorySelected = pCategory;
         this.questionsGame =  new ArrayList<Question>();
+        this.answerQuestions =  new ArrayList<Question>();
     }
 
     public ArrayList<Question> getQuestionsGame() {
@@ -37,48 +45,56 @@ public class Game {
         return categorySelected;
     }
 
-    public Question getQuestion() throws Exception {
-        if(this.questionsGame.size()==this.nextQuestion){
-            throw new Exception("Sin preguntas");
-        }
-        Question actualQuestion = this.questionsGame.get(nextQuestion);
-        actualQuestion.setAlternativeResponse(this.getRandomResponse(actualQuestion.getResponseQuestion().getTextResponse()));
-        this.nextQuestion++;
-        return  actualQuestion;
+    public void setCurrentQuestion() throws EmptyQuestionArrayException {
+        //VALIDATION
+        if(this.questionsGame.size() == 0) throw new EmptyQuestionArrayException(MessageException.NOFOUNDQUESTIONS );
+        this.currentQuestion  = this.questionsGame.remove(0); //NEXT QUESTION ON QUEUE
+        this.answerQuestions.add(this.currentQuestion);
     }
-
-    private String[] getRandomResponse(String response){
+    public void AddAlternativeResponses(String[] alternative){
+        this.currentQuestion.setAlternativeResponse(getRandomResponse(alternative));
+    }
+    private String[] getRandomResponse(String[] alternative){
         String[] responses = new String[4];
-        responses[0] = response;
-        Random random = new Random();
-        int index,arrayIndex = 1; // Because response[0] is true response
-        while (arrayIndex!=4){
-            index = random.nextInt(this.questionsGame.size());
-            if(index == this.nextQuestion){
-                continue;
-            }else{
-                responses[arrayIndex] = this.questionsGame.get(index).getResponseQuestion().getTextResponse();
-                arrayIndex++;
-            }
+        responses[0] = this.currentQuestion.getResponseQuestion().getTextResponse();
+        for(int i = 0;i<alternative.length;i++){
+            responses[i+1] = alternative[i];
         }
-        return this.shuffleArray(responses);
+        return responses;
+    }
+    private void shuffleResponsesArray(String[] ar) {
+        // If running on Java 6 or older, use `new Random()` on RHS here
+        Random rnd = new Random();
+        for (int i = ar.length - 1; i > 0; i--) {
+            int index = rnd.nextInt(i + 1);
+            // Simple swap
+            String a = ar[index];
+            ar[index] = ar[i];
+            ar[i] = a;
+        }
     }
 
-    private String[]  shuffleArray(String[] array)
-    {
-        int index;
-        String tempValue;
-        Random random = new Random();
-        for (int i = array.length - 1; i > 0; i--)
-        {
-            index = random.nextInt(i + 1);
-            if (index != i)
-            {
-                tempValue = array[i];
-                array[i] = array[index];
-                array[index] = tempValue;
-            }
-        }
-        return array;
+    public Question getCurrentQuestion() {
+        return currentQuestion;
+    }
+
+    public void answerCurrentQuestion(String text, int time) {
+        //if(this.validateResponse(text)){
+            this.pointsGame++;
+         //   this.currentQuestion.setPoint(1);
+       // }
+    }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "categorySelected=" + categorySelected +
+                ", pointsGame=" + pointsGame +
+                ", speedGame=" + speedGame +
+                ", questionsGame=" + questionsGame +
+                ", answerQuestions=" + answerQuestions.toString() +
+                ", currentQuestion=" + currentQuestion +
+                ", nextQuestion=" + nextQuestion +
+                '}';
     }
 }

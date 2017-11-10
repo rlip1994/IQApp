@@ -15,8 +15,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import Controllers.CategoryController;
-import Model.Category;
+import controllers.CategoryController;
 
 /**
  * Created by klcho.o on 16/9/2017.
@@ -25,9 +24,11 @@ import Model.Category;
 public class categoryList extends AppCompatActivity {
 
     private ListView list;
-    public ProgressBar progressBar;
+    private ProgressBar progressBar;
+    private ImageView celebrate;
     ArrayList<CategoryView> dataCategoryView = new ArrayList<CategoryView>();
     private CategoryController controller;
+
 
 
     @Override
@@ -36,6 +37,8 @@ public class categoryList extends AppCompatActivity {
         setContentView(R.layout.adapter_category);
         list = (ListView) findViewById(R.id.ListView_Categorylist);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        celebrate = (ImageView)findViewById(R.id.celebrateImage);
+        utils.Message.showAlertMessage(this,"Ingresando" );
         this.hiddenProgressBar();
         //Start Controller
         try {
@@ -96,5 +99,9 @@ public class categoryList extends AppCompatActivity {
         alertDialog.setTitle("Alert");
         alertDialog.setMessage(pMessage);
         alertDialog.show();
+    }
+
+    public void setVisibleCelebrateImage() {
+        this.celebrate.setVisibility(View.VISIBLE);
     }
 }

@@ -1,18 +1,13 @@
-package Controllers;
+package controllers;
 
-import android.app.Activity;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.smartapp.web.smart.MainActivity;
 import com.smartapp.web.smart.categoryList;
 
@@ -22,13 +17,12 @@ import org.json.JSONObject;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
-import Model.Category;
-import  conexion.AppController;
+import model.Category;
+import conexion.AppController;
 import utils.Const;
+import utils.Message;
 
 /**
  * Created by kanat on 16/9/2017.
@@ -60,7 +54,8 @@ public class CategoryController {
 
     private void getAllCategories() {
         this.categoryActivity.showProgressBar();
-        JsonArrayRequest req = new JsonArrayRequest(Const.URL_CATEGORIES,
+        String idKid = String.valueOf(UserController.user.getCurrentKid().getIdKid());
+        JsonArrayRequest req = new JsonArrayRequest(Const.URL_CATEGORIES+idKid,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -101,19 +96,31 @@ public class CategoryController {
     private void getArrayCategories(String pString) throws JSONException {
         JSONArray arrayJson = new JSONArray(pString);
         arrayJson = arrayJson.getJSONArray(0);
-        //Declare temporal variables
-        int idCategory = 0;
-        String nameCategory = "";
-        Category tempCategory;
+        if (!this.existsCategories(arrayJson)){
+            this.categoryActivity.setVisibleCelebrateImage();
+            Message.showAlertMessage(this.categoryActivity,"Has completado todos los temas");
+        }else {
+            //Declare temporal variables
+            int idCategory = 0;
+            String nameCategory = "";
+            Category tempCategory;
 
-        for (int i = 0; i < arrayJson.length(); i++) {
-            JSONObject jsonObj = arrayJson.getJSONObject(i);
-            idCategory = jsonObj.getInt("idcategory");
-            nameCategory = jsonObj.getString("name");
-            tempCategory = new Category(idCategory, nameCategory);
-            this.categories.add(tempCategory);
+            for (int i = 0; i < arrayJson.length(); i++) {
+                JSONObject jsonObj = arrayJson.getJSONObject(i);
+                idCategory = jsonObj.getInt("idCategory");
+                nameCategory = jsonObj.getString("name");
+                tempCategory = new Category(idCategory, nameCategory);
+                this.categories.add(tempCategory);
+            }
+
         }
+
     }
+
+    private boolean existsCategories(JSONArray arrayJson) {
+        return arrayJson.length()!=0;
+    }
+
     public  void showAlertMessage(String pMessage){
         AlertDialog alertDialog = new AlertDialog.Builder(this.categoryActivity).create();
         alertDialog.setTitle("Alert");

@@ -2,15 +2,16 @@ package com.smartapp.web.smart;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import Controllers.QuestionController;
-import Model.Question;
 import cn.iwgang.countdownview.CountdownView;
+import controllers.QuestionController;
+import utils.Message;
+import utils.PlayerSounds;
 
 /**
  * Created by klcho.o on 12/9/2017.
@@ -20,11 +21,14 @@ public class questionsText extends AppCompatActivity {
 
     private CountdownView countDownTimer;
     private ProgressBar progressBar;
+    private Button response;
     private TextView statement;
     private RadioButton opcion1;
     private RadioButton opcion2;
     private RadioButton opcion3;
     private RadioButton opcion4;
+
+    private String selectedAnswer;
 
     private QuestionController controller;
 
@@ -33,12 +37,22 @@ public class questionsText extends AppCompatActivity {
         setContentView(R.layout.questions_text);
         // Instance all view objects
         this.progressBar = (ProgressBar)  findViewById(R.id.progressbar);
+
         countDownTimer = (CountdownView) findViewById(R.id.time);
+
         this.statement = (TextView) findViewById(R.id.statement);
         this.opcion1 = (RadioButton)  findViewById(R.id.opcion1);
         this.opcion2 = (RadioButton)  findViewById(R.id.opcion2);
         this.opcion3 = (RadioButton)  findViewById(R.id.opcion3);
         this.opcion4 = (RadioButton)  findViewById(R.id.opcion4);
+
+        this.response = (Button)  findViewById(R.id.answerButton);
+        this.response.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendResponse();
+            }
+        });
 
         this.hiddenProgressBar();
         // Call Question controller
@@ -61,38 +75,49 @@ public class questionsText extends AppCompatActivity {
     }
 
     public void showQuestion(String... params){
-        this.statement.setText(params[0]);
-        this.opcion1.setText(params[1]);
-        this.opcion2.setText(params[2]);
-        this.opcion3.setText(params[3]);
-        this.opcion4.setText(params[4]);
-        this.startTimer();
+        Message.showAlertMessage(this,params[0]);
+       // this.statement.setText(params[0]);
+        //this.opcion1.setText(params[1]);
+        //this.opcion2.setText(params[2]);
+        //this.opcion3.setText(params[3]);
+        //this.opcion4.setText(params[4]);
+        //this.startTimer();
     }
 
 
     public void onRadioButtonClicked(View view){
-
+        PlayerSounds.playAnswerClick(this);
         boolean checked = ((RadioButton) view).isChecked();
-        int time ;
         switch(view.getId()) {
             case R.id.opcion1:
                 if (checked)
-                    time = this.stopTimer();
+                    this.setSelectedAnswer(R.id.opcion1);
                     break;
             case R.id.opcion2:
                 if (checked)
-                    time = this.stopTimer();
+                    this.setSelectedAnswer(R.id.opcion2);
                     break;
              case R.id.opcion3:
                 if (checked)
-                    time = this.stopTimer();
+                    this.setSelectedAnswer(R.id.opcion3);
                     break;
             case R.id.opcion4:
                 if (checked)
-                    time = this.stopTimer();
+                    this.setSelectedAnswer(R.id.opcion4);
                     break;
         }
 
+    }
+    private void setSelectedAnswer(int option){
+        PlayerSounds.playSwitchClick(this);
+        this.selectedAnswer = (String) ((RadioButton)  findViewById(option)).getText();
+
+    }
+
+    private void sendResponse() {
+        PlayerSounds.playGoodClick(this);
+        int time = this.stopTimer();
+        controller.answerCurrentQuestion(this.selectedAnswer,time);
     }
 
     public void  showProgressBar(){
@@ -104,5 +129,15 @@ public class questionsText extends AppCompatActivity {
 
     public void finishGame() {
         //TODO
+    }
+
+    public void showQuestion(String textQuestion, String[] responses) {
+       // Message.showAlertMessage(this, Arrays.toString(responses));
+        this.statement.setText(textQuestion);
+        this.opcion1.setText(responses[0]);
+        this.opcion2.setText(responses[1]);
+        this.opcion3.setText(responses[2]);
+        this.opcion4.setText(responses[3]);
+        this.startTimer();
     }
 }
