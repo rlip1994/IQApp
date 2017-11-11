@@ -16,6 +16,7 @@ public class Question {
     private int idQuestion;
     private String textQuestion;
     private int pointQuestion;
+    private int scoreQuestion;
     private Time speedQuestion;
     private Response responseQuestion;
 
@@ -24,10 +25,12 @@ public class Question {
 
     /**
      * Method: Contructor
+     * @param idQuestion
+     * @param description
      * @param pIdQuestion Identifier question
      * @param pTextQuestion Question description
-     * **/
-     public Question(int pIdQuestion,String pTextQuestion){
+       **/
+     public Question(int idQuestion, String description, int pIdQuestion, String pTextQuestion){
          this.idQuestion = pIdQuestion;
          this.textQuestion = pTextQuestion;
      }
@@ -40,9 +43,10 @@ public class Question {
      *
      * **/
 
-     public Question(int pIdQuestion,String pTextQuestion,int pIdResponse,String pTextReponse){
+     public Question(int pIdQuestion,String pTextQuestion,int pIdResponse,String pTextReponse,int pPoints){
          this.idQuestion = pIdQuestion;
          this.textQuestion = pTextQuestion;
+         this.pointQuestion = pPoints;
          this.responseQuestion =  new Response(pIdResponse,pTextReponse);
      }
     /**
@@ -85,7 +89,7 @@ public class Question {
     /**
      * @param  point : 1 correct response
      *                 2 wrong response **/
-    public void setPointQuestion(int point) {
+    public void setScoreQuestion(int point) {
         this.pointQuestion = point;
     }
 
@@ -99,5 +103,17 @@ public class Question {
                 ", responseQuestion=" + responseQuestion +
                 ", alternativeResponse=" + Arrays.toString(alternativeResponse) +
                 '}';
+    }
+
+    public boolean validateQuestion(String text) {
+        return this.getResponseQuestion().getTextResponse()==(text);
+    }
+
+    public int getPointsQuestion() {
+        return this.pointQuestion;
+    }
+
+    public int getScoreQuestion() {
+        return scoreQuestion;
     }
 }

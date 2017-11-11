@@ -1,6 +1,5 @@
 package model;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -17,12 +16,13 @@ public class Game {
      * **/
      private Category  categorySelected;
      private int pointsGame;
-     private Time speedGame; // Select correct class of time?
+     private int speedGame; // Select correct class of time?
      private ArrayList<Question> questionsGame;
      private ArrayList<Question> answerQuestions;
      private Question currentQuestion;
      private int nextQuestion = 0;
-
+     private int counterSpeed;
+     private int idGame;
 
 
     /**Method: Constructor
@@ -60,6 +60,7 @@ public class Game {
         for(int i = 0;i<alternative.length;i++){
             responses[i+1] = alternative[i];
         }
+        shuffleResponsesArray(responses);
         return responses;
     }
     private void shuffleResponsesArray(String[] ar) {
@@ -78,11 +79,37 @@ public class Game {
         return currentQuestion;
     }
 
-    public void answerCurrentQuestion(String text, int time) {
-        //if(this.validateResponse(text)){
-            this.pointsGame++;
-         //   this.currentQuestion.setPoint(1);
-       // }
+    public void answerCurrentQuestion(String text, int time, Integer timeValue) {
+        if(this.currentQuestion.validateQuestion(text)) {
+            this.pointsGame += this.currentQuestion.getPointsQuestion();
+            this.currentQuestion.setScoreQuestion(this.getCurrentQuestion().getPointsQuestion());
+        }else{
+            this.currentQuestion.setScoreQuestion(this.getCurrentQuestion().getPointsQuestion());
+        }
+        this.speedGame += Math.abs(timeValue-time); // Need know actual speed in seconds
+        this.counterSpeed++;
+    }
+
+    // RESULTS OPERATIONS
+    public void calculateResults() {
+        this.pointsGame = this.calculateScorePoints(); // BASE 100
+        this.speedGame = this.calculateSpeedResults();// AVERAGE
+    }
+    private int calculateSpeedResults() {
+        return Integer.valueOf((this.speedGame /this.counterSpeed)/60);//in seconds
+    }
+
+    private int calculateScorePoints() {
+        int totalPoints = calculateTotalPoints();
+        return Integer.valueOf((this.pointsGame/totalPoints) * 100);
+    }
+
+    private int calculateTotalPoints(){
+        int counter = 0;
+        for (Question question : this.getAnswerQuestions()) {
+            counter += question.getPointsQuestion();
+        }
+        return counter;
     }
 
     @Override
@@ -97,4 +124,27 @@ public class Game {
                 ", nextQuestion=" + nextQuestion +
                 '}';
     }
+
+
+    public int getPointsGame() {
+        return this.pointsGame;
+    }
+
+    public int getSpeedGame() {
+        return speedGame;
+    }
+
+    public void setIdGame(int idGame) {
+        this.idGame = idGame;
+    }
+
+    public ArrayList<Question> getAnswerQuestions() {
+        return answerQuestions;
+    }
+
+    public int getIdGame() {
+        return idGame;
+    }
+
+
 }

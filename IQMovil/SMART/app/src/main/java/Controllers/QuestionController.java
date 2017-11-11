@@ -14,7 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 import conexion.AppController;
 import exceptions.EmptyQuestionArrayException;
@@ -45,7 +45,7 @@ public class QuestionController {
 
     }
     private void getQuestionxCategory() {
-        this.activity.showProgressBar();
+        this.showProgressDialog();
         String data =  String.valueOf(game.getCategorySelected().getIdCategory())+"/"+String.valueOf(kid.getGradeIdKid()) ;
         JsonArrayRequest req = new JsonArrayRequest(Const.URL_QUESTIONS+data,
                 new Response.Listener<JSONArray>() {
@@ -92,7 +92,6 @@ public class QuestionController {
     }
 
     private void showQuestion() {
-            Message.showAlertMessage(this.activity, Arrays.toString(this.game.getCurrentQuestion().getAlternativeResponse()));
             String[] responses = this.game.getCurrentQuestion().getAlternativeResponse();
             if (responses == null){
                 Message.showAlertMessage(this.activity,MessageException.NOFOUNDANSWERS);
@@ -112,6 +111,7 @@ public class QuestionController {
         int idGrade;
         int idanswer;
         String valueAnswer = "";
+        int points = 0;
         Question tempQuestion;
         for (int i = 0; i < arrayJson.length(); i++) {
             JSONObject jsonObj = arrayJson.getJSONObject(i);
@@ -120,18 +120,15 @@ public class QuestionController {
             idGrade = jsonObj.getInt("idgrade");
             idanswer = jsonObj.getInt("idanswer");
             valueAnswer = jsonObj.getString("value");
-            tempQuestion =  new Question(idQuestion,description,idanswer,valueAnswer);
+            points = jsonObj.getInt("points");
+            tempQuestion =  new Question(idQuestion,description,idanswer,valueAnswer,points);
             this.game.addQuestion(tempQuestion);
         }
     }
 
-
-    public void answerCurrentQuestion(String text, int time) {
-        Message.showAlertMessage(this.activity,"Response is"+ text +"and time is"+String.valueOf(time));
-    }
-
     public void getAlternativeResponse(){
        // questions/answers/2
+        showProgressDialog();
         String data =  String.valueOf(this.game.getCurrentQuestion().getIdQuestion()) ;
         JsonArrayRequest req = new JsonArrayRequest(Const.URL_ANSWERS_QUESTIONS+data,
                 new Response.Listener<JSONArray>() {
@@ -141,7 +138,7 @@ public class QuestionController {
                         try {
                             String[] responses = getArrayResponse(response.toString());
                             addQuestionResponses(responses);
-                            showQuestion();
+                            showQuestion(); // Show current question
                         } catch (JSONException e) {
                             Message.showAlertMessage(activity,"!No podemos mostrar las preguntas en estos momentos");
                         }
@@ -180,7 +177,109 @@ public class QuestionController {
         }
         return responses;
     }
+    /**
+     * ANSWER CONTROLLER AND QUESTION TRANSITION**/
+    public void answerCurrentQuestion(String text, int time, int timeValue) {
+        try {
+            this.game.answerCurrentQuestion(text,time,timeValue);// Add player response
+            Message.showAlertMessage(this.activity,"Value response"+text+"actual response"+this.game.getCurrentQuestion().getResponseQuestion().getTextResponse());
+            this.game.setCurrentQuestion(); // Set currentQuestion
+            this.getAlternativeResponse(); // Set alternative responses for current question
+        } catch (EmptyQuestionArrayException e) {
+            this.finishGame();
+        }
+    }
+    /**
+     * GAMES' END CONTROLLER**/
+    private void finishGame() {
+        this.game.calculateResults();
+        this.saveGame();
+        Message.showAlertMessage(this.activity,"Points:"+String.valueOf(this.game.getPointsGame())+ "Speed:"+String.valueOf(this.game.getSpeedGame()));
+    }
+
+    private void saveGame() {
+        JsonArrayRequest req = new JsonArrayRequest(Const.URL_SAVE_GAME + createGameDataForm(),
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d(TAG, response.toString());
+                        try {
+                            int idGame = getIdGameFromRequest(response.toString());
+                            game.setIdGame(idGame);
+                            saveQuestions();
+                        } catch (JSONException e) {
+                            Message.showAlertMessage(activity,"!No podemos mostrar las preguntas en estos momentos");
+                        }
+                        hideProgressDialog();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Message.showAlertMessage(activity,"¡Ops!,No podemos acceder al servidor");
+                hideProgressDialog();
+            }
+
+        });
+        // Adding request to request queue
+        if (req == null){
+            Toast.makeText(this.activity,req.toString(),Toast.LENGTH_LONG).show();
+        }
+        AppController.getInstance().addToRequestQueue(req, tag_json_arry);
+    }
+
+    private void saveQuestions() {
+        ArrayList<Question> questions = this.game.getAnswerQuestions();
+        for (Question question : questions) {
+            saveQuestionxGame(question);
+        }
+    }
+
+    private void saveQuestionxGame(Question question) {
+        JsonArrayRequest req = new JsonArrayRequest(Const.URL_SAVE_QUESTION + createQuestionDataForm(question),
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Message.showAlertMessage(activity,"¡Ops!,No podemos acceder al servidor");
+            }
+        });
+        // Adding request to request queue
+        if (req == null){
+            Toast.makeText(this.activity,req.toString(),Toast.LENGTH_LONG).show();
+        }
+        AppController.getInstance().addToRequestQueue(req, tag_json_arry);
+    }
+
+    private String createQuestionDataForm(Question question) {
+        String data = String.valueOf(this.game.getIdGame()) +"/";
+        data += String.valueOf(question.getIdQuestion())+"/";
+        data += String.valueOf(question.getScoreQuestion());
+        return data;
+    }
+
+    private int getIdGameFromRequest(String s ) throws JSONException {
+        JSONArray arrayJson = new JSONArray(s);
+        arrayJson = arrayJson.getJSONArray(0);
+        //Declare temporal variables
+        JSONObject jsonObj = arrayJson.getJSONObject(0);
+         return  jsonObj.getInt("gameId");
+    }
+
+    private String createGameDataForm() {
+        String data = String.valueOf(kid.getIdKid()) +"/";
+        data += String.valueOf(this.game.getPointsGame())+"/";
+        data += String.valueOf(this.game.getCategorySelected().getIdCategory())+"/";
+        data += String.valueOf(this.game.getSpeedGame());
+        return data;
+    }
+
     private void hideProgressDialog() {
         this.activity.hiddenProgressBar();
     }
+    private void showProgressDialog() {this.activity.showProgressBar();}
 }

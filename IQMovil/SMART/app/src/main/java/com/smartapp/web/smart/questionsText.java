@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import cn.iwgang.countdownview.CountdownView;
 import controllers.QuestionController;
-import utils.Message;
 import utils.PlayerSounds;
 
 /**
@@ -29,7 +28,7 @@ public class questionsText extends AppCompatActivity {
     private RadioButton opcion4;
 
     private String selectedAnswer;
-
+    private Integer timeValue = 45000; // 45 seconds
     private QuestionController controller;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,22 +65,12 @@ public class questionsText extends AppCompatActivity {
 
 
     public void startTimer(){
-        countDownTimer.start(45000); // 45 segundos
+        countDownTimer.start(timeValue);
     }
 
     public int stopTimer(){
         countDownTimer.stop();
         return this.countDownTimer.getSecond();
-    }
-
-    public void showQuestion(String... params){
-        Message.showAlertMessage(this,params[0]);
-       // this.statement.setText(params[0]);
-        //this.opcion1.setText(params[1]);
-        //this.opcion2.setText(params[2]);
-        //this.opcion3.setText(params[3]);
-        //this.opcion4.setText(params[4]);
-        //this.startTimer();
     }
 
 
@@ -109,7 +98,7 @@ public class questionsText extends AppCompatActivity {
 
     }
     private void setSelectedAnswer(int option){
-        PlayerSounds.playSwitchClick(this);
+        PlayerSounds.playAnswerClick(this);
         this.selectedAnswer = (String) ((RadioButton)  findViewById(option)).getText();
 
     }
@@ -117,7 +106,7 @@ public class questionsText extends AppCompatActivity {
     private void sendResponse() {
         PlayerSounds.playGoodClick(this);
         int time = this.stopTimer();
-        controller.answerCurrentQuestion(this.selectedAnswer,time);
+        controller.answerCurrentQuestion(this.selectedAnswer,time,this.getTimeValue());
     }
 
     public void  showProgressBar(){
@@ -133,11 +122,17 @@ public class questionsText extends AppCompatActivity {
 
     public void showQuestion(String textQuestion, String[] responses) {
        // Message.showAlertMessage(this, Arrays.toString(responses));
+        //Clean options
         this.statement.setText(textQuestion);
         this.opcion1.setText(responses[0]);
         this.opcion2.setText(responses[1]);
         this.opcion3.setText(responses[2]);
         this.opcion4.setText(responses[3]);
         this.startTimer();
+    }
+
+    //SETTERS AND GETTERS
+    public Integer getTimeValue() {
+        return timeValue;
     }
 }

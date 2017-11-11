@@ -11,4 +11,6 @@ public class Const {
 	public static final String URL_VALIDATION = SERVER_ADDRESS +"userLogin/";
 	public static final String URL_QUESTIONS = SERVER_ADDRESS +"questions/";
 	public static final String URL_ANSWERS_QUESTIONS = SERVER_ADDRESS + "questions/answers/";
+	public static final String URL_SAVE_GAME = SERVER_ADDRESS+"games/insertGame/";
+	public static final String URL_SAVE_QUESTION = SERVER_ADDRESS+"games/linkQuestion/";
 }
