@@ -28,6 +28,7 @@ var results = require('./routes/results');
 var getValidUser = require('./routes/getValidUser');
 var getUsersTypes = require('./routes/getUsersTypes');
 var getType = require('./routes/getType');
+var games = require('./routes/games');
 var app = express();
 
 
@@ -70,6 +71,7 @@ app.use('/results',results);
 app.use('/getValidUser',getValidUser);
 app.use('/getUsersTypes',getUsersTypes);
 app.use('/getType',getType);
+app.use('/games',games);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

@@ -4,8 +4,8 @@ var router = express.Router();
 var kidAll=require('../models/getAllKids');
 var kid=require('../models/getKid');
 
-router.get('/', function(req, res, next) {
-    kidAll.sp_getAllKidsResults(function(err,rows){
+router.get('/:idUser', function(req, res, next) {
+    kidAll.sp_getAllKidsResults(req.params.idUser,function(err,rows){
         if(err)
         {
             res.json(err);
@@ -26,5 +26,4 @@ router.get('/kidGames/:idPlayer', function(req, res, next) {
         }
     });
 });
-
 module.exports = router;

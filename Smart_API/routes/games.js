@@ -1,10 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var category=require('../models/category');
-router.get('/',function(req,res,next){
+var games=require('../models/game');
+router.get('/insertGame/:idPlayer/:points/:idCategory/:speed',function(req,res,next){
 
-        category.getAllCategories(function(err,rows){
-
+        games.addGamexPlayer(req.params.idPlayer,req.params.points,req.params.idCategory,req.params.speed,function(err,rows){
             //console.log(req.body);
             if(err)
             {
@@ -15,10 +14,9 @@ router.get('/',function(req,res,next){
             }
         });
 });
-router.get('/player/:idPlayer',function(req,res,next){
+router.get('/linkQuestion/:idGame/:idQuestion/:points',function(req,res,next){
 
-        category.getCategoriesPlayer(req.params.idPlayer,function(err,rows){
-
+        games.addQuestionxGame(req.params.idQuestion,req.params.idGame,req.params.points,function(err,rows){
             //console.log(req.body);
             if(err)
             {

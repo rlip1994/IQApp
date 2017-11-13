@@ -7,8 +7,8 @@ var getAllKids={
 return db.query("call sp_getAllKids(?)",[idUser],callback);
 
 },
-  sp_getAllKidsResults: function(callback){
-  	return db.query("call getAllKidsResults()",callback);
+  sp_getAllKidsResults: function(idUser,callback){
+  	return db.query("call getAllKidsResults(?)",[idUser],callback);
   }
  };
 
