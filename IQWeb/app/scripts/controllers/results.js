@@ -7,14 +7,15 @@
  * # ProfileCtrl
  * Controller of the iqwebApp
  */
-angular.module('iqwebApp').controller('resultsCtrl', function ($scope,$http,$filter) 
+angular.module('iqwebApp').controller('resultsCtrl', function ($scope,$http,$cookieStore,$filter) 
 {
   //{age : ageFilter,school : schoolFilter,level: levelFilter, name : nameInput}
     $scope.nameKid = "";
     $scope.filterResult = [];
     $scope.results = [];
+    $scope.idUser = $cookieStore.get('idUser');
+    $scope.showSchoolsResults = false;
     
-
     //DropDown SCHOOLS
     $http.get('http://andresolis-littlestark.c9users.io:8080/getSchool/names')
     .then(function(response){
@@ -57,7 +58,7 @@ angular.module('iqwebApp').controller('resultsCtrl', function ($scope,$http,$fil
           
 
   };
-  $http.get('http://andresolis-littlestark.c9users.io:8080/results/')
+  $http.get('http://andresolis-littlestark.c9users.io:8080/results/'+$scope.idUser)
     .then(function(kids)
     {
         kids.data[0].forEach(function(kid)
@@ -65,12 +66,12 @@ angular.module('iqwebApp').controller('resultsCtrl', function ($scope,$http,$fil
           $http.get('http://andresolis-littlestark.c9users.io:8080/results/kidGames/'+kid.idPlayer)
           .then(function(games)
           {
-            
             kid.games=games.data[0];
             kid.category = "";
             var grade  = 0;
-
+            kid.gameString = "";//Reset variable 
             kid.games.forEach(function(game){
+              kid.gameString += game.category +": "+ game.grade+"\n\n";
               grade += game.grade;
             });
             kid.grade = grade/kid.games.length;
@@ -84,11 +85,23 @@ angular.module('iqwebApp').controller('resultsCtrl', function ($scope,$http,$fil
           });
 
         });
+        $scope.updateMainResults(); // Show general results
     }).catch(function(error){
       console.log(error);
   });
-
+  
+ 
    //Main results controllers
+  $scope.updateSchoolResults = function(){
+     var averageCounter = 0;
+     //var speedCounter = 0;
+    //Update main average 
+     $scope.filterResult.forEach(function(element){
+        averageCounter += parseInt(element.grade);
+     });
+     $scope.averageSchool = parseInt((averageCounter/parseInt($scope.filterResult.length)));
+     $scope.kidCountSchool = $scope.filterResult.length;
+  };
   $scope.updateMainResults = function(){
      var averageCounter = 0;
      //var speedCounter = 0;
@@ -99,10 +112,9 @@ angular.module('iqwebApp').controller('resultsCtrl', function ($scope,$http,$fil
      $scope.average = parseInt((averageCounter/parseInt($scope.filterResult.length)));
      $scope.kidCount = $scope.filterResult.length;
   };
-
   $scope.filterResults= function(){ 
       $scope.filterResult = $filter('filter')($scope.results,{"age": $scope.ageFilter,"school" :$scope.schoolFilter, "name" : $scope.nameKid ,"category" : $scope.categoryFilter});
-      $scope.updateMainResults();    
+      $scope.updateSchoolResults();    
   };
   $scope.filterResults();
 
@@ -111,8 +123,10 @@ angular.module('iqwebApp').controller('resultsCtrl', function ($scope,$http,$fil
     $scope.schoolSelected = school;
       if($scope.schoolSelected ==="Ninguno"){ 
         $scope.schoolFilter = "";
+        $scope.showSchoolsResults = false;
       }else{
         $scope.schoolFilter = $scope.schoolSelected;
+        $scope.showSchoolsResults = true;
       }
     $scope.filterResults();
   };
@@ -139,9 +153,7 @@ angular.module('iqwebApp').controller('resultsCtrl', function ($scope,$http,$fil
         $scope.filterResult.forEach(function(kid){
           kid.grade = kid.mainGrade;
           kid.category = "";
-
         });
-        
         $scope.categoryFilter = $scope.categorySelected;
         $scope.filterResult.forEach(function(kid)
         {
@@ -149,22 +161,14 @@ angular.module('iqwebApp').controller('resultsCtrl', function ($scope,$http,$fil
           if(game ===undefined){
             kid.category = "";
           }else{
-          
             kid.grade = game.grade;
             kid.category = game.category;
           }
-          
         });
       }
       $scope.filterResults();
-      
   };
-
-
-
-
-
- 
+  
   $scope.showCategoryFilter = function(){
     
   };

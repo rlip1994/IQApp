@@ -66,6 +66,9 @@ angular.module('iqwebApp')
                     }
                 }
             }
+            else{
+                vm.errorDialog();
+            }
         }
 
 

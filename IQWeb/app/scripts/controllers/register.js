@@ -35,6 +35,7 @@ angular.module('iqwebApp')
                         
                         console.dir(response);
                         if(response.data.affectedRows === 1){
+                            SuccesfulDialog();
                             $location.path('/login');
                         }
                         else{
@@ -54,6 +55,18 @@ angular.module('iqwebApp')
           .clickOutsideToClose(true)
           .title('Error')
           .textContent('El nombre de cuenta ya existe')
+          .ariaLabel('Alert Dialog Demo')
+          .ok('Aceptar')
+      );
+    }
+    
+    function SuccesfulDialog() {
+      
+      $mdDialog.show(
+        $mdDialog.alert()
+          .clickOutsideToClose(true)
+          .title('Registro Válido')
+          .textContent('El registro de usuario se hizo existosamente')
           .ariaLabel('Alert Dialog Demo')
           .ok('Aceptar')
       );

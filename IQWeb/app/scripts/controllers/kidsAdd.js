@@ -15,6 +15,7 @@ angular.module('iqwebApp')
     vm.acceptAddKid = acceptAddKid;
     vm.loadRegions = loadRegions;
     vm.loadCities = loadCities;
+    vm.errorDialog = errorDialog;
     vm.start = start;
 
 
@@ -68,7 +69,22 @@ angular.module('iqwebApp')
           .ok('Aceptar')
       );
     }
+  
+    function errorDialog() {
 
+            var alert = $mdDialog.alert()
+                .clickOutsideToClose(true)
+                .title('Error')
+                .textContent('Debe llenar todos los datos que se le solicitan')
+                .ariaLabel('Alert Dialog Demo')
+                .ok('Aceptar');
+
+            $mdDialog.show(alert).then(function() {
+                //$window.location.reload();
+            });
+            
+            
+    }
 
 
     function loadCities() {
@@ -83,30 +99,38 @@ angular.module('iqwebApp')
     }
 
     function acceptAddKid() {
-
-      if (vm.getkid) {
-        vm.getkid.country = vm.selectedCountry.name;
-        vm.getkid.region = vm.selectedRegion.name;
-        vm.getkid.city = vm.selectedCity.idCity;
-        vm.getkid.grade = vm.selectedGrade.idGrade;
-        vm.getkid.school = vm.selectedSchool.idSchool;
+      
         vm.getkid.idUser = $cookieStore.get('idUser');
-
-
-        $http.post('http://andresolis-littlestark.c9users.io:8080/addKid', vm.getkid).then(function (response) {
-          $scope.vm.addKidResponse = response;
-          
-            // validacion del contenido de getkid  que no sea NULL  
-            succesDialog();
        
-            var landingUrl = "http://" + $window.location.host + "/#!/kids";
-            $window.location.href = landingUrl;
-        });
+      if (!angular.isUndefined(vm.getkid)) {
+                if (!angular.isUndefined(vm.selectedCountry) && !angular.isUndefined(vm.selectedRegion) && !angular.isUndefined(vm.selectedCity) && 
+                !angular.isUndefined(vm.selectedGrade) && !angular.isUndefined(vm.selectedSchool)) {
+                    vm.getkid.country = vm.selectedCountry.name;
+                    vm.getkid.region = vm.selectedRegion.name;
+                    vm.getkid.city = vm.selectedCity.idCity;
+                    vm.getkid.grade = vm.selectedGrade.idGrade;
+                    vm.getkid.school = vm.selectedSchool.idSchool;
+                  
+                        $http.post('http://andresolis-littlestark.c9users.io:8080/addKid', vm.getkid).then(function (response) {
+                          $scope.vm.addKidResponse = response;
+                          
+                            succesDialog();
+                       
+                            var landingUrl = "http://" + $window.location.host + "/#!/kids";
+                            $window.location.href = landingUrl;
+                        });
+
+                   
+                }
+                else{
+                  vm.errorDialog();
+                }
+            }
+
+
         
-
-
-      }
-
+       
+    
     }
 
 

@@ -17,8 +17,6 @@ angular.module('iqwebApp')
     vm.acceptUpdate = acceptUpdate;
     vm.changePassword = changePassword;
 
-    vm.start = start;
-
 
     vm.edit = true;
     vm.changePass = false;
@@ -35,7 +33,8 @@ angular.module('iqwebApp')
         $scope.vm.user = response.data[0][0];
       });
     }
-
+    
+    start();
     function editProfile() {
       vm.edit = false;
       vm.changePass = true;
@@ -94,7 +93,7 @@ angular.module('iqwebApp')
         return prom.then(function (result) {
           if (result) {
             return $http.post('http://andresolis-littlestark.c9users.io:8080/userProfileMod', vm.user).then(function (response) {
-
+             
               return response;
 
             });
@@ -103,7 +102,7 @@ angular.module('iqwebApp')
 
       } else {
         return $http.post('http://andresolis-littlestark.c9users.io:8080/userProfileMod', vm.user).then(function (response) {
-
+          
           return response;
 
         });
@@ -114,7 +113,6 @@ angular.module('iqwebApp')
     }
 
     function acceptUpdate() {
-
       var prom = doUpdate();
       var ok = prom.then(function (result) {
         if (result) {
@@ -125,13 +123,15 @@ angular.module('iqwebApp')
         succesDialog();
 
       }
+      
+
+
+    }
+      /**/
 
 
 
     }
 
 
-
-
-  }
   );

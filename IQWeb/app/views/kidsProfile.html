@@ -1,24 +1,28 @@
-<form role="form" id="form_profileKids" ng-init="vm.start()" ng-submit="vm.acceptUpdate()">
+<form role="form" id="form_profileKids" ng-init="vm.start()" ng-submit="vm.acceptUpdate()" name = "form_profileKids">
     <div class="row">
         <div class="col-sm-8">
             
             <h2 align="center">Información Personal</h2>
             <div class="form-group">
                 <label for="username_kid">Nombre</label>
-                <input type="text" class="form-control" id="username_kid" ng-model="vm.getkid.name" ng-disabled="vm.edit">
-            
+                <input type="text" class="form-control" id="username_kid" name="username_kid" ng-model="vm.getkid.name" ng-disabled="vm.edit" required>
+                <span style="color:red" ng-show="form_profileKids.username_kid.$touched && form_profileKids.username_kid.$invalid ">Colocar el nombre del niño</span>
+
             <div class="form-group">
                 <label for="lastname_kid">Primer Apellido</label>
-                <input type="text" class="form-control" id="lastname_kid" ng-model="vm.getkid.lastname1" ng-disabled="vm.edit">
+                <input type="text" class="form-control" id="lastname_kid" name="lastname_kid" ng-model="vm.getkid.lastname1" ng-disabled="vm.edit" required>
+                <span style="color:red" ng-show="form_profileKids.lastname_kid.$touched && form_profileKids.lastname_kid.$invalid ">Colocar el primer apellido del niño</span>
             </div>
             <div class="form-group">
                 <label for="lastname2_kid">Segundo Apellido</label>
-                <input type="text" class="form-control" id="lastname2_kid" ng-model="vm.getkid.lastname2" ng-disabled="vm.edit">
+                <input type="text" class="form-control" id="lastname2_kid" name="lastname2_kid"ng-model="vm.getkid.lastname2" ng-disabled="vm.edit" required>
+                <span style="color:red" ng-show="form_profileKids.lastname2_kid.$touched && form_profileKids.lastname2_kid.$invalid ">Colocar el segundo del niño</span>
             </div>
         
             <div class="form-group">
                 <label for="select_age_kid">Edad</label>
-                <input type="number" class="form-control" id="select_age_kid" ng-model="vm.getkid.age" ng-disabled="vm.edit">
+                <input type="number" class="form-control" id="select_age_kid" name="ageKid" ng-model="vm.getkid.age" ng-disabled="vm.edit" required>
+                <span style="color:red" ng-show="form_profileKids.ageKid.$touched && form_profileKids.ageKid.$invalid ">Colocar el segundo del niño</span>
             </div>
             <div class="form-group" ng-show="vm.edit">
                 <label for="school">Escuela</label>
@@ -31,14 +35,14 @@
         
             <div class="form-group" ng-hide="vm.edit">
                 <label for="selSchool">Escuela</label>
-                <select class="form-control" ng-model="vm.selectedSchool" ng-options="x.name for x in vm.getSchool">  
-                </select>
+                <select name= "schoolKid" class="form-control" ng-model="vm.selectedSchool" ng-options="x.name for x in vm.getSchool" required>  </select>
+                <span style="color:red" ng-show="form_profileKids.schoolKid.$pristine && form_profileKids.schoolKid.$invalid ">Colocar escuela del niño</span>
         
             </div>
             <div class="form-group" ng-hide="vm.edit">
                 <label for="selGrade">Grado</label>
-                <select class="form-control" ng-model="vm.selectedGrade" ng-options="x.name for x in vm.getGrades"> 
-                </select>
+                <select name="gradeKid" class="form-control" ng-model="vm.selectedGrade" ng-options="x.name for x in vm.getGrades" required> </select>
+                <span style="color:red" ng-show="form_profileKids.gradeKid.$pristine && form_profileKids.gradeKid.$invalid ">Colocar grado del niño</span>
         
             </div>
         
@@ -56,31 +60,34 @@
             </div>
             <div class="form-group" ng-hide="vm.edit">
                 <label for="selCountry">Pais:</label>
-                <select ng-click="vm.loadRegions()" class="form-control" ng-model="vm.selectedCountry" ng-options="x.name for x in vm.getCountry">
-                </select>
+                <select name= "countryKid" ng-click="vm.loadRegions()" class="form-control" ng-model="vm.selectedCountry" ng-options="x.name for x in vm.getCountry" required></select>
+                <span style="color:red" ng-show="form_profileKids.countryKid.$pristine && form_profileKids.countryKid.$invalid ">Colocar pais del niño</span>
         
             </div>
             <div class="form-group" ng-hide="vm.edit">
                 <label for="selRegions">Región:</label>
-                <select ng-click="vm.loadCities()" class="form-control" ng-model="vm.selectedRegion" ng-options="x.name for x in vm.getRegions">
-                </select>
+                <select name= "regionKid" ng-click="vm.loadCities()" class="form-control" ng-model="vm.selectedRegion" ng-options="x.name for x in vm.getRegions" required></select>
+                <span style="color:red" ng-show="form_profileKids.regionKid.$pristine && form_profileKids.regionKid.$invalid ">Colocar region del niño</span>
         
             </div>
             <div class="form-group" ng-hide="vm.edit">
                 <label for="selCities">Ciudad:</label>
-                <select class="form-control" ng-model="vm.selectedCity" ng-options="x.name for x in vm.getCities"><option value='' selected>{{vm.getkid.city}}</option>
-                </select>
+                <select class="form-control" ng-model="vm.selectedCity" name = "cityKid" ng-options="x.name for x in vm.getCities" required></select>
+                <span style="color:red" ng-show="form_profileKids.cityKid.$pristine && form_profileKids.cityKid.$invalid ">Colocar ciudad del niño</span>
         
             </div>
             <div class="form-group">
                 <label for="zipcode">Código Postal</label>
-                <input type="text" class="form-control" id="zipcode" ng-model="vm.getkid.zipCode" ng-disabled="vm.edit">
+                <input type="text" class="form-control" id="zipcode" name="zipcodeKid" ng-model="vm.getkid.zipCode" ng-disabled="vm.edit" required>
+                <span style="color:red" ng-show="form_profileKids.zipcodeKid.$touched && form_profileKids.zipcodeKid.$invalid ">Colocar el segundo del niño</span>
             </div>
             <div class="form-group">
                 <div class= "row"><label>Residencia</label></div>
                 <label for="location">Direccion1</label>
-                <input type="text" class="form-control" id="location" ng-model="vm.getkid.detail1" ng-disabled="vm.edit">
-                <label for="location">Direccion1</label>
+                <input type="text" class="form-control" id="location" name="location" ng-model="vm.getkid.detail1" ng-disabled="vm.edit" required>
+                <span style="color:red" ng-show="form_profileKids.location.$touched && form_profileKids.location.$invalid ">Colocar el segundo del niño</span>
+                
+                <label for="location2">Direccion2</label>
                 <input type="text" class="form-control" id="location2" ng-model="vm.getkid.detail2" ng-disabled="vm.edit">
             </div>
         
@@ -96,7 +103,7 @@
                     <a ng-click="vm.backKidsForm()" type="button" class="btn btn-default btn_back" ng-show="vm.edit" ng-href="#!/kids">Atras</a>
                     <a ng-click="vm.updateKidsForm()" type="button" class="btn btn-default btn_update" ng-show="vm.edit">Modificar Datos</a>
                     <a ng-click="vm.cancelUpdate()" type="button" class="btn btn-default btn_cancel" ng-show="vm.btnAcceptCancel">Cancelar</a>
-                    <input type="submit" class="btn btn-default btn_accept" ng-show="vm.btnAcceptCancel" value='Aceptar'>
+                    <input type="submit" class="btn btn-default btn_accept" ng-show="vm.btnAcceptCancel" value='Aceptar'></input>
         
                 </div>
             </div>

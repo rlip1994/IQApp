@@ -35,39 +35,55 @@
 				</div>
 			</div>
 			<div>
-				<h2><font color="#006699">Resultados Generales</font></h2>
+				<h2><font color="#006699">Resultados Generales {{categoryFilter}}</font></h2>
 				<h6>Promedio en puntaje:</h6>{{average}}
 				<h6>Cantidad de niños:</h6>{{kidCount}}
+			</div>
+			<div ng-show ="showSchoolsResults">
+				<h2><font color="#006699">Resultados Centro Educativo {{categoryFilter}}</font></h2>
+				<h6>Promedio en puntaje:</h6>{{averageSchool}}
+				<h6>Cantidad de niños:</h6>{{kidCountSchool}}
 			</div>
 			<div >
 				<h2>Encuestas</h2>
 				<div>
 					<input type="text" class="form-control" placeholder="Buscar niño" ng-model="nameKid">
 				</div>
-				<div class="table-responsive">          
-				  	<table class="table">
-					    <thead>
-						      <tr>
-							        <th>Nombre</th>
-							        <th>Edad</th>
-							        <th>Grado</th>
-							        <th>Centro Educativo</th>
-							        <th>Promedio</th>
-						      </tr>
-					    </thead>
-					    <tbody>
-					      	<tr ng-init="updateMainResults()" ng-repeat="result in (filterResult | filter : {name : nameKid})">	
+			  	<table class="table">
+				    <thead>
+					      <tr>
+						        <th>Nombre</th>
+						        <th>Edad</th>
+						        <th>Grado</th>
+						        <th>Centro Educativo</th>
+						        <th>Promedio {{categoryFilter}}</th>
+						        <th>Juegos</th>
+					      </tr>
+				    </thead>
+				    <tbody>
+				    	<div>
+				    		<tr ng-init="updateMainResults()" ng-repeat="result in (filterResult | filter : {name : nameKid})" ng-click="result.show = !result.show"  >	
 				      			<td>{{result.name}}</td>
 						        <td>{{result.age}}</td>
 						        <td>{{result.level}}</td>
 						        <td>{{result.school}}</td>
 						        <td>{{result.grade}}</td>
+								<td>
+									{{result.gameString}}
+								</td>
 					      	</tr>
-					    </tbody>
-				  	</table>
-				</div>
+				    	</div>
+				    </tbody>
+			  	</table>
 			</div>
 		
+		<div class="slicerContainer">
+		<div class="slicerObject" ng-repeat="object in slicerObjects">
+			<div class="slicerTitle" ng-click="object.show = !object.show"> {{object.name}} </div>
+			<div class="slicerContent" ng-show="object.show"> {{object.content}} </div>
+		</div>
+	</div>
+
 		
 			<!-- <div ng-repeat="result in (filterResult = (results | filter : {age : inputText, level: inputlevel}))">
 		

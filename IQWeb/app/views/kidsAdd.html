@@ -26,7 +26,8 @@
             
             <div class="form-group">
                 <label for="lastname2_kid">Segundo Apellido</label>
-                <input type="text" class="form-control" id="lastname2_kid" name='lastname2Kid' ng-model="vm.getkid.lastname2"  required>
+                <input type="text" class="form-control" id="lastname2_kid" name='lastname2Kid' ng-model="vm.getkid.lastname2" required>
+                <span style="color:red" ng-show="form_AddKid.lastnameKid.$touched && form_AddKid.lastnameKid.$invalid ">Colocar el segundo apellido del niño</span>
             </div>
             
             <div class="form-group">
@@ -37,27 +38,34 @@
             
             <div class="form-group">
                 <label for="selSchool">Escuela</label>
-                <select  class="form-control" ng-model="vm.selectedSchool" ng-options="x.name for x in vm.getSchool" required></select>
+                <select required  class="form-control" name="kidSchool" ng-model="vm.selectedSchool" ng-options="x.name for x in vm.getSchool" ></select>
+                <span style="color:red" ng-show="form_AddKid.kidSchool.$pristine && form_AddKid.kidSchool.$invalid ">Seleccionar una escuela</span>
             </div>
             
             <div class="form-group">
                 <label for="selGrade">Grado</label>
-                <select  class="form-control" ng-model="vm.selectedGrade" ng-options="x.name for x in vm.getGrades" required></select>
+                <select  class="form-control"  name ="kidGrade" ng-model="vm.selectedGrade" ng-options="x.name for x in vm.getGrades" required></select>
+                <span style="color:red" ng-show="form_AddKid.kidGrade.$pristine && form_AddKid.kidGrade.$invalid ">Seleccionar un pais</span>
             </div>
             
             <div class="form-group">
                 <label for="selCountry">Pais:</label>
-                <select  ng-click="vm.loadRegions()" class="form-control" ng-model="vm.selectedCountry" ng-options="x.name for x in vm.getCountry" required></select>
+                <select  ng-click="vm.loadRegions()" class="form-control" name="kidCountry" ng-model="vm.selectedCountry" ng-options="x.name for x in vm.getCountry" required></select>
+                <span style="color:red" ng-show="form_AddKid.kidCountry.$pristine && form_AddKid.kidCountry.$invalid ">Seleccionar un pais</span>
+
             </div>
               
             <div class="form-group">
                 <label for="selRegions">Región:</label>
-                <select  ng-click="vm.loadCities()" class="form-control" ng-model="vm.selectedRegion" ng-options="x.name for x in vm.getRegions" required></select>
+                <select  ng-click="vm.loadCities()" name="kidRegion" class="form-control" ng-model="vm.selectedRegion" ng-options="x.name for x in vm.getRegions" required></select>
+                <span style="color:red" ng-show="form_AddKid.kidRegion.$pristine && form_AddKid.kidRegion.$invalid ">Seleccionar una región</span>
+
             </div>
             
             <div class="form-group">
                 <label for="selCities">Ciudad:</label>
-                <select  class="form-control" ng-model="vm.selectedCity" ng-options="x.name for x in vm.getCities" required></select>
+                <select class="form-control" name="kidCity" ng-model="vm.selectedCity" ng-options="x.name for x in vm.getCities" required></select>
+                <span style="color:red" ng-show="form_AddKid.kidCity.$pristine && form_AddKid.kidCity.$invalid ">Seleccionar una ciudad </span>
             </div>
             
             <div class="form-group">
@@ -72,7 +80,7 @@
                 <label for="location">Direccion1</label>
                 <input type="text" class="form-control" id="location" name='location' ng-model="vm.getkid.detail1"  required>
                 <span style="color:red" ng-show="form_AddKid.location.$touched && form_AddKid.location.$invalid ">Colocar dirección de residencia detallada</span>
-                <label for="location">Direccion2</label>
+                <label for="location2">Direccion2</label>
                 <input type="text" class="form-control" id="location2" ng-model="vm.getkid.detail2">
                 
                 
@@ -94,7 +102,7 @@
               <div class="col-sm-offset-1 col-sm-6" align="center">
                   
               <a type="button" class="btn btn-default btn_cancel" ng-href="#!/kids">Cancelar</a>
-              <input type="submit" class="btn btn-default btn_accept" value='Aceptar'>
+              <input type="submit" class="btn btn-default btn_accept" value='Aceptar'> </input>
               </div>
           </div>
        </div>
